@@ -1,1 +1,0 @@
-module.exports = teste = ['1','1','2']
