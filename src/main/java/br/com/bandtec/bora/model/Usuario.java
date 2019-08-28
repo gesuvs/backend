@@ -21,6 +21,9 @@ public class Usuario {
 	private String celular;
 	
 	private String senha;
+	
+	public Usuario() {
+	}
 
 	public Long getIdUsuario() {
 		return idUsuario;
