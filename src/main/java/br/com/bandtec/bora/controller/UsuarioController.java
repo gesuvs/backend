@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.bandtec.bora.model.Usuario;
 import br.com.bandtec.bora.repository.UsuarioRepository;
+import br.com.bandtec.bora.service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -19,10 +20,13 @@ public class UsuarioController {
 	
 	@Autowired
 	UsuarioRepository usuarioRepository;
+	UsuarioService usuarioService;
 	
 	@PostMapping("/cadastro")
 	public ResponseEntity<Usuario> cadastraUsuario(@RequestBody Usuario usuario) {
-		Usuario salvaUsuario = usuarioRepository.save(usuario);
+		
+//		Usuario salvaUsuario = usuarioRepository.save(usuario);
+		Usuario salvaUsuario = usuarioService.validaCadastro(usuario);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().replacePath("/usuarios").path("/{id}")
 				.buildAndExpand(salvaUsuario.getIdUsuario()).toUri();
