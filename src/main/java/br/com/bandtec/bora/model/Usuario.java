@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tbd_usuario") //nome da tabela a ser criada
+@Table(name="tbd_teste") //nome da tabela a ser criada
 public class Usuario {
 	
 	@Id
