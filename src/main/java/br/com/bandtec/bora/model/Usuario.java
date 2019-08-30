@@ -1,6 +1,6 @@
 package br.com.bandtec.bora.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 public class Usuario {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)     //define a pk da tabela e gera automaticamente
+	@GeneratedValue(strategy = GenerationType.AUTO)     //define a pk da tabela e gera automaticamente
 	private Long idUsuario;
 	
 	private String nome;
