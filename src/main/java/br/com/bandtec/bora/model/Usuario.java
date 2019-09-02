@@ -1,6 +1,8 @@
 package br.com.bandtec.bora.model;
 
 import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,25 +18,32 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idUsuario;
+	@Column(name = "idUsuario")
+	private Long idUsuario;	
 
+	@Column(name = "nome")
 	private String nome;
 
 	@NotNull
+	@Column(name = "usuario")
 	private String usuario;
 
 	@NotNull
+	@Column(name = "celular")
 	private String celular;
 
 	@NotNull
+	@Column(name = "senha")
 	private String senha;
 
 	@NotNull
 	@CreationTimestamp
+	@Column(name = "cadastroEm")
 	private Date cadastroEm;
 	
 	@NotNull
 	@UpdateTimestamp
+	@Column(name = "alteradoEm")
 	private Date alteradoEm;
 
 	public Long getIdUsuario() {
@@ -92,7 +101,4 @@ public class Usuario {
 	public void setAlteradoEm(Date alteradoEm) {
 		this.alteradoEm = alteradoEm;
 	}
-	
-	
-	
 }
