@@ -1,32 +1,57 @@
 package br.com.bandtec.bora.model;
 
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="tbd_teste") //nome da tabela a ser criada
+@Table(name = "tbd_usuario")
 public class Usuario {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)     //define a pk da tabela e gera automaticamente
-	private Long idUsuario;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idUsuario")
+	private Long idUsuario;	
+
+	@Column(name = "nome")
 	private String nome;
-	
+
+	@NotNull
+	@Column(name = "usuario")
 	private String usuario;
-	
+
+	@NotNull
+	@Column(name = "celular")
 	private String celular;
-	
+
+	@NotNull
+	@Column(name = "senha")
 	private String senha;
-	
-	public Usuario() {
-	}
+
+//	@NotNull
+//	@CreationTimestamp
+//	@Column(name = "cadastroEm")
+//	private Date cadastroEm;
+//	
+//	@NotNull
+//	@UpdateTimestamp
+//	@Column(name = "alteradoEm")
+//	private Date alteradoEm;
 
 	public Long getIdUsuario() {
 		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public String getNome() {
@@ -61,4 +86,19 @@ public class Usuario {
 		this.senha = senha;
 	}
 
+//	public Date getCadastroEm() {
+//		return cadastroEm;
+//	}
+
+//	public void setCadastroEm(Date cadastroEm) {
+//		this.cadastroEm = cadastroEm;
+//	}
+//
+//	public Date getAlteradoEm() {
+//		return alteradoEm;
+//	}
+
+//	public void setAlteradoEm(Date alteradoEm) {
+//		this.alteradoEm = alteradoEm;
+//	}
 }
