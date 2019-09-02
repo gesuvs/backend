@@ -26,11 +26,7 @@ public class Usuario {
 	@Column(name = "idUsuario")
 	private Long idUsuario;	
 
-	@Column(name = "nome")
-	private String nome;
-
 	@NotNull
-	
 	@Column(name = "nome")
 	@Pattern(regexp="^[a-zA-Z\\s]+",message="Voce tem certeza que seu nome ta correto?")
 	private String nome;
