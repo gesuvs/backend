@@ -21,14 +21,19 @@ public class Usuario {
 	@Column(name = "idUsuario")
 	private Long idUsuario;	
 
+	
 	@Column(name = "nome")
+	@Pattern(regexp="^[a-zA-Z\\s]+",message="Voce tem certeza que seu nome ta correto?")
 	private String nome;
 
 	@NotNull
+	@NotEmpty(message="Nome do usuario nao pode ficar vazio")
+	@Size(min = 2,max = 32, message="Nome do usuario nao pode ser menor que 2 ou maior que 32 caracteres")
 	@Column(name = "usuario")
 	private String usuario;
 
 	@NotNull
+	@Pattern(regexp="\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d")
 	@Column(name = "celular")
 	private String celular;
 
