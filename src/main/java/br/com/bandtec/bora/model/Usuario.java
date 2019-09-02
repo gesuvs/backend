@@ -9,6 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,10 +30,19 @@ public class Usuario {
 	private String nome;
 
 	@NotNull
+	
+	@Column(name = "nome")
+	@Pattern(regexp="^[a-zA-Z\\s]+",message="Voce tem certeza que seu nome ta correto?")
+	private String nome;
+
+	@NotNull
+	@NotEmpty(message="Nome do usuario nao pode ficar vazio")
+	@Size(min = 2,max = 32, message="Nome do usuario nao pode ser menor que 2 ou maior que 32 caracteres")
 	@Column(name = "usuario")
 	private String usuario;
 
 	@NotNull
+	@Pattern(regexp="\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d", message = "voce tem certeza que seu numero de celular esta correto?")
 	@Column(name = "celular")
 	private String celular;
 
@@ -36,15 +50,16 @@ public class Usuario {
 	@Column(name = "senha")
 	private String senha;
 
-//	@NotNull
-//	@CreationTimestamp
-//	@Column(name = "cadastroEm")
-//	private Date cadastroEm;
-//	
-//	@NotNull
-//	@UpdateTimestamp
-//	@Column(name = "alteradoEm")
-//	private Date alteradoEm;
+
+	@NotNull
+	@CreationTimestamp
+	@Column(name = "cadastroEm")
+	private Date cadastroEm;
+	
+	@NotNull
+	@UpdateTimestamp
+	@Column(name = "alteradoEm")
+	private Date alteradoEm;
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -85,20 +100,19 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	public Date getCadastroEm() {
+		return cadastroEm;
+	}
 
-//	public Date getCadastroEm() {
-//		return cadastroEm;
-//	}
+	public void setCadastroEm(Date cadastroEm) {
+		this.cadastroEm = cadastroEm;
+	}
 
-//	public void setCadastroEm(Date cadastroEm) {
-//		this.cadastroEm = cadastroEm;
-//	}
-//
-//	public Date getAlteradoEm() {
-//		return alteradoEm;
-//	}
+	public Date getAlteradoEm() {
+		return alteradoEm;
+	}
 
-//	public void setAlteradoEm(Date alteradoEm) {
-//		this.alteradoEm = alteradoEm;
-//	}
+	public void setAlteradoEm(Date alteradoEm) {
+		this.alteradoEm = alteradoEm;
+	}
 }
