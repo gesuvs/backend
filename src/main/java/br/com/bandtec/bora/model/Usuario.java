@@ -1,12 +1,16 @@
 package br.com.bandtec.bora.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotEmpty;
@@ -24,13 +28,9 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idUsuario")
-	private Long idUsuario;	
-
-	@Column(name = "nome")
-	private String nome;
+	private Long idUsuario;
 
 	@NotNull
-	
 	@Column(name = "nome")
 	@Pattern(regexp="^[a-zA-Z\\s]+",message="Voce tem certeza que seu nome ta correto?")
 	private String nome;
@@ -49,7 +49,10 @@ public class Usuario {
 	@NotNull
 	@Column(name = "senha")
 	private String senha;
-
+	
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Sala> sala;
 
 	@NotNull
 	@CreationTimestamp
