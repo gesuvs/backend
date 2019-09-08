@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.bandtec.bora.model.Sala;
-import br.com.bandtec.bora.model.Usuario;
+import br.com.bandtec.bora.model.entity.Sala;
+import br.com.bandtec.bora.model.entity.Usuario;
+import br.com.bandtec.bora.model.service.SalaService;
 import br.com.bandtec.bora.repository.SalaRepositorio;
-import br.com.bandtec.bora.service.SalaService;
 
 
 @RestController

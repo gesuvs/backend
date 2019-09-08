@@ -1,8 +1,8 @@
-package br.com.bandtec.bora.security;
-
+package br.com.bandtec.bora.bora;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -18,25 +18,42 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                .antMatchers("/", "/home", "/api**", "/api/usuarios**", "/api**")
+                	.permitAll()
+            .anyRequest()
+            	.authenticated().and()
             .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
+            	.loginPage("/login")
+                	.permitAll().and()
             .logout()
                 .permitAll();
     }
+	
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http
+//			.authorizeRequests()
+//				.antMatchers(HttpMethod.POST, "/api/cadastrar-usuario").permitAll()
+//				.antMatchers(HttpMethod.GET, "/", "home", "/api/usuarios").permitAll()
+//				.anyRequest().authenticated()
+//				.and()
+//			.formLogin()
+//				.loginPage("/login")
+//				.permitAll()
+//				.and()
+//			.logout()
+//				.permitAll();
+//			
+//	}
 
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
         UserDetails user =
              User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("password")
-                .roles("USER")
+                .username("bruno")
+                .password("123")
+                .roles("ADMIN")
                 .build();
 
         return new InMemoryUserDetailsManager(user);

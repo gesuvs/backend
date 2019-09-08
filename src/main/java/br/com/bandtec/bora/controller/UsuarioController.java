@@ -3,6 +3,7 @@ package br.com.bandtec.bora.controller;
 
 import java.util.List;
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.bandtec.bora.model.Usuario;
-import br.com.bandtec.bora.service.UsuarioService;
+
+import br.com.bandtec.bora.model.entity.Usuario;
+import br.com.bandtec.bora.model.excecoes.DomainException;
+import br.com.bandtec.bora.model.service.UsuarioService;
 
 @RestController
 @RequestMapping("/api")
@@ -26,7 +29,7 @@ public class UsuarioController {
 	 * Para cadastrar um usuario
 	 */
 	
-	@PostMapping("/usuarios")
+	@PostMapping("/cadastrar-usuario")
 	public ResponseEntity<Usuario> criarUsuario(@Valid @RequestBody Usuario usuario) {
 		return ResponseEntity.ok(usuarioService.cadastrarUsuario(usuario));
 	}
@@ -36,7 +39,7 @@ public class UsuarioController {
 	 */
 
 	@GetMapping("/usuarios")
-	public List<Usuario> usuariosLoo() {
+	public List<Usuario> buscarTodosUsuarios() {
 		return usuarioService.buscarTodosUsuarios();
 	}
 
@@ -44,15 +47,15 @@ public class UsuarioController {
 	 * Para buscar usuarios cadastrados pelo idUsuario
 	 */
 
-	@GetMapping("usuarios/{idUsuario}")
-	public Usuario buscarUsuarioPeloIdUsuario(@PathVariable(value = "idUsuario") Long idUsuario) {
+	@GetMapping("usuarios/{id}")
+	public ResponseEntity<Usuario> buscarUsuarioPeloIdUsuario(@PathVariable(value = "id") Long idUsuario) {
 		Usuario buscarUsuario = usuarioService.buscarUsuarioPeloIdUsuario(idUsuario);
 
 		if (buscarUsuario == null) {
-			return null;
+			throw new DomainException("Usuario não encontrado");
 		}
 
-		return usuarioService.buscarUsuarioPeloIdUsuario(idUsuario);
+		return ResponseEntity.ok(usuarioService.buscarUsuarioPeloIdUsuario(idUsuario));
 
 	}
 //
