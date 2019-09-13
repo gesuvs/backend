@@ -2,9 +2,13 @@ package br.com.bandtec.bora.controller;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,18 +25,24 @@ import br.com.bandtec.bora.repository.SalaRepositorio;
 public class SalaController {
 	
 	@Autowired
-	SalaRepositorio salaRepositorio;
-	SalaService salaService;
+	private SalaService salaService;
 	
 	@PostMapping("/sala")
 	public ResponseEntity<Sala> cadastraSala(@RequestBody Sala sala) {
 
-		Sala salvaUsuario = salaService.cadastrarSala(sala);
-
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().replacePath("/salas").path("/{id}")
-				.buildAndExpand(salvaUsuario.getIdSala()).toUri();
-
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.ok(salaService.cadastrarSala(sala));
 	}
 	
+//	@PutMapping("/sala")
+//	public ResponseEntity<Sala> atualizarSala(@RequestBody Sala sala) {
+//		
+//		return ResponseEntity.ok(salaService.atualizarSala(sala));
+//	}
+	
+	@PutMapping("/sala/{idSala}")
+	public ResponseEntity<Sala> atualizarSala(@PathVariable (value = "idSala") Long idSala,
+			@Valid @RequestBody Sala sala) {
+		return ResponseEntity.ok(salaService.atualizarSala(sala));
+	}
+
 }

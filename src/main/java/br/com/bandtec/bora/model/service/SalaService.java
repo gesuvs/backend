@@ -7,5 +7,6 @@ import br.com.bandtec.bora.model.entity.Sala;
 @Service
 public interface SalaService {
 	Sala cadastrarSala(Sala sala);
-
+	
+	Sala atualizarSala(Sala sala);
 }

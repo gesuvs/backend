@@ -35,7 +35,7 @@ public class Sala {
 	private String categoria;
 	
 //	@Pattern()
-	@Size(min= 2,max = 255, message = "A quantidade de pessoas de")
+//	@Size(min= 2,max = 255, message = "A quantidade de pessoas de")
 	@Column(name = "qtd_pessoas")
 	private Long qtdPessoa;
 	

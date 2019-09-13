@@ -16,6 +16,14 @@ public class SalaServiceImpl implements SalaService{
 	public Sala cadastrarSala(Sala sala) {
 		return salaRepositorio.save(sala); 
 	}
+
+	@Override
+	public Sala atualizarSala(Sala sala) {
+		sala = salaRepositorio.findById(sala.getIdSala()).get();
+		sala.setNome(sala.getNome());
+		sala.setCategoria(sala.getCategoria());
+		return salaRepositorio.save(sala);
+	}
 	
 
 }
