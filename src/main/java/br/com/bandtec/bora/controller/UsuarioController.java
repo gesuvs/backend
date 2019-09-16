@@ -29,7 +29,7 @@ public class UsuarioController {
 	 * Para cadastrar um usuario
 	 */
 	
-	@PostMapping("/cadastrar-usuario")
+	@PostMapping("/usuarios")
 	public ResponseEntity<Usuario> criarUsuario(@Valid @RequestBody Usuario usuario) {
 		return ResponseEntity.ok(usuarioService.cadastrarUsuario(usuario));
 	}
@@ -88,9 +88,5 @@ public class UsuarioController {
 	public void deletarUsuario(@PathVariable(value = "idUsuario") Long idUsuario) {
 		 usuarioService.deletarUsuario(idUsuario);
 	}
-//
-//	private List<Usuario> todosUsuarios() {
-//		return obterTodosUsuarios;
-//	}
 
 }

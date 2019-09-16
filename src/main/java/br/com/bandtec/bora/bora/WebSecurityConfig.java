@@ -37,7 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.PUT, "/api/eventos/{idEvento}").permitAll()
 		
 		.antMatchers(HttpMethod.GET, "/api/usuarios").authenticated()
-		.antMatchers(HttpMethod.POST, "/api/cadastrar-usuario").permitAll()
+		.antMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
+		
+		
 		.anyRequest().authenticated()
 		.and().formLogin().permitAll()
 		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
