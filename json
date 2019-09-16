@@ -1,0 +1,39 @@
+
+//cadastrar evento-------------------------------------------------------
+
+POST - http://localhost:8080/api/eventos
+
+{
+	"usuario":"bruno",
+	"nome":"futsabado",
+	"categoria":"futebol",
+	"qtdPessoa":"100",
+	"dataHora":"5",
+    "endereco":"rua abril"
+ }
+ 
+ //atualizar evento------------------------------------------------------
+ 
+ PUT - http://localhost:8080/api/eventos/{idEvento}
+ 
+ {
+	"usuario": "alterado",
+	"nome":"alterado",
+	"categoria":"alterado",
+	"qtdPessoa":"150",
+	"dataHora":"10",
+    "endereco":"alterado"
+ }
+ 
+ //cadastrar usuario------------------------------------------------------
+ 
+ POST - http://localhost:9000/api/usuarios
+ 
+ {
+	"nome":"bruno",
+	"usuario":"bruno",
+	"celular":"12345678911",
+    "senha":"123"
+ }
+ 
+ 
