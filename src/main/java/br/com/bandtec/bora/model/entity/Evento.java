@@ -15,13 +15,13 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "tbd_sala")
-public class Sala {
+@Table(name = "tbd_evento")
+public class Evento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idSala")
-	private Long idSala;
+	@Column(name = "idEvento")
+	private Long idEvento;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@JoinColumn(name="idUsuario")
@@ -46,12 +46,12 @@ public class Sala {
 	private String endereco;
 
 	
-	public Long getIdSala() {
-		return idSala;
+	public Long getIdEvento() {
+		return idEvento;
 	}
 
-	public void setIdSala(Long idSala) {
-		this.idSala = idSala;
+	public void setIdEvento(Long idEvento) {
+		this.idEvento = idEvento;
 	}
 
 	public String getNome() {
