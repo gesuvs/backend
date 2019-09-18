@@ -45,13 +45,20 @@ public class Evento {
 	@Column(name = "endereco")
 	private String endereco;
 
-	
 	public Long getIdEvento() {
 		return idEvento;
 	}
 
 	public void setIdEvento(Long idEvento) {
 		this.idEvento = idEvento;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getNome() {

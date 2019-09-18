@@ -1,6 +1,7 @@
 package br.com.bandtec.bora.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -41,9 +42,8 @@ public class EventoController {
 	}
 	
 	@GetMapping("/eventos/{usuario}")
-	public ResponseEntity<Evento> buscarEventoPorUsuario(@PathVariable(value='usuario') String usuario,
-			@Valid @RequestBody Evento evento){
-		return ResponseEntity.ok(eventoService.buscarEventoPorUsuario());
+	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {
+		return eventoService.buscarEventosPorUsuario(evento.getUsuario());
 	}
 
 }
