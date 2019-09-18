@@ -27,7 +27,7 @@ POST - http://localhost:8080/api/eventos
  
  //cadastrar usuario------------------------------------------------------
  
- POST - http://localhost:9000/api/usuarios
+ POST - http://localhost:8080/api/usuarios
  
  {
 	"nome":"bruno",
@@ -36,4 +36,19 @@ POST - http://localhost:8080/api/eventos
     "senha":"123"
  }
  
+ //Buscar todos os usuários-----------------------------------------------
+ 
+ GET - http://localhost:8080/api/usuarios
+ 
+ //Buscar usuarios pelo ID------------------------------------------------
+ 
+ GET - http://localhost:8080/api/usuarios/{id}
+ 
+ //Deletar usuário pelo ID------------------------------------------------
+ 
+ DELETE - http://localhost:8080/api/usuarios/{id}
+ 
+ //BUSCAR TODAS AS CATEGORIAS---------------------------------------------
+ 
+ GET - http://localhost:8080/api/categoria
  
