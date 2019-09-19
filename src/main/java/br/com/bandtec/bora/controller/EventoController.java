@@ -30,9 +30,9 @@ public class EventoController {
 	@Autowired
 	private EventoService eventoService;
 	
+	
 	@PostMapping("/eventos")
 	public ResponseEntity<Evento> cadastraEvento(@RequestBody Evento evento) {
-
 		return ResponseEntity.ok(eventoService.cadastrarEvento(evento));
 	}
 	
@@ -55,5 +55,9 @@ public class EventoController {
 	}
 	
 	
+	@GetMapping("/eventos/{usuario}")
+	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {
+		return eventoService.buscarEventosPorUsuario(evento.getUsuario());
+	}
 
 }

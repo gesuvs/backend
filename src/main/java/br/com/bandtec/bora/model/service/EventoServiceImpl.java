@@ -33,13 +33,12 @@ public class EventoServiceImpl implements EventoService{
 
 	@Override
 	public List<Evento> buscarEventoPorNome(String nomeEvento) {
-		// TODO Auto-generated method stub
 		return (List<Evento>) eventoRepositorio.findbyNome(nomeEvento);
 	}
 
-
-
-		
+	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {
+		return eventoRepositorio.findByUsuario(usuario.getUsuario());
+	}
 	
 
 }
