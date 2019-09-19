@@ -31,10 +31,10 @@ public class EventoServiceImpl implements EventoService{
 		return eventoRepositorio.save(evento);
 	}
 
-	@Override
-	public List<Evento> buscarEventoPorNome(String nomeEvento) {
-		return (List<Evento>) eventoRepositorio.findbyNome(nomeEvento);
-	}
+//	@Override
+//	public List<Evento> buscarEventoPorNome(String nomeEvento) {
+//		return (List<Evento>) eventoRepositorio.findbyNome(nomeEvento);
+//	}
 
 	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {
 		return eventoRepositorio.findByUsuario(usuario.getUsuario());

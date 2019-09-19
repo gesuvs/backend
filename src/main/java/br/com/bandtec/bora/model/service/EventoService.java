@@ -14,7 +14,7 @@ public interface EventoService {
 	
 	Evento atualizarEvento(Long idEvento, Evento evento);
 
-	List<Evento> buscarEventoPorNome(String nomeEvento);
+//	List<Evento> buscarEventoPorNome(String nomeEvento);
 	
 	List<Evento> buscarEventosPorUsuario(Usuario usuario);
 }
