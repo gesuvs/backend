@@ -17,4 +17,9 @@ public interface EventoService {
 //	List<Evento> buscarEventoPorNome(String nomeEvento);
 	
 	List<Evento> buscarEventosPorUsuario(Usuario usuario);
+	
+	List<Evento> buscarTodosEventos(Evento evento);
+	
+	
+	
 }

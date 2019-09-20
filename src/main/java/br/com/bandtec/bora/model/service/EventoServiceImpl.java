@@ -14,6 +14,10 @@ public class EventoServiceImpl implements EventoService{
 
 	@Autowired
 	private EventoRepositorio eventoRepositorio;
+
+	@Autowired
+	private EventoService eventoService;
+	
 	
 	@Override
 	public Evento cadastrarEvento(Evento evento) {
@@ -25,7 +29,6 @@ public class EventoServiceImpl implements EventoService{
 		evento.setIdEvento(idEvento);
 		evento.setNome(evento.getNome());
 		evento.setEndereco(evento.getEndereco());
-		evento.setQtdPessoa(evento.getQtdPessoa());
 		evento.setCategoria(evento.getCategoria());
 		evento.setDataHora(evento.getDataHora());
 		return eventoRepositorio.save(evento);
@@ -38,6 +41,10 @@ public class EventoServiceImpl implements EventoService{
 
 	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {
 		return eventoRepositorio.findByUsuario(usuario.getUsuario());
+	}
+	
+	public List<Evento> buscarTodosEventos(Evento evento) {
+		return eventoRepositorio.findAll();
 	}
 	
 

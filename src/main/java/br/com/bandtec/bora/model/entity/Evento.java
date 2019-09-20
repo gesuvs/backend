@@ -34,11 +34,6 @@ public class Evento {
 	@Column(name = "categoria")
 	private String categoria;
 	
-//	@Pattern()
-//	@Size(min= 2,max = 255, message = "A quantidade de pessoas de")
-	@Column(name = "qtd_pessoas")
-	private Long qtdPessoa;
-	
 	@Column(name = "dataHora")
 	private Long dataHora;
 	
@@ -75,14 +70,6 @@ public class Evento {
 
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
-	}
-
-	public Long getQtdPessoa() {
-		return qtdPessoa;
-	}
-
-	public void setQtdPessoa(Long qtdPessoa) {
-		this.qtdPessoa = qtdPessoa;
 	}
 
 	public Long getDataHora() {
