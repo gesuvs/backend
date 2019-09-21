@@ -17,6 +17,9 @@ public class EventoServiceImpl implements EventoService{
 
 	@Autowired
 	private EventoService eventoService;
+
+	@Autowired
+	private UsuarioEventoRepositorio usuarioEventoRepositorio;
 	
 	
 	@Override

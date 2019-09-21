@@ -20,12 +20,12 @@ public class Evento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idEvento")
+	@Column(name = "id_evento")
 	private Long idEvento;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	@JoinColumn(name="idUsuario")
-	private Usuario usuario;
+	@JoinColumn(name="id_organizador")
+	private Usuario organizador;
 	
 	@NotNull
 	@Column(name = "nome")
@@ -88,4 +88,11 @@ public class Evento {
 		this.endereco = endereco;
 	}
 
+	public Usuario getOrganizador() {
+		return organizador;
+	}
+
+	public void setEndereco(Usuario organizador) {
+		this.organizador = organizador;
+	}
 }
