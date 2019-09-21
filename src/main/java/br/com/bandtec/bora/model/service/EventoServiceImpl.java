@@ -51,11 +51,11 @@ public class EventoServiceImpl implements EventoService{
 
 	@Override
 	public void cadastrarEvento(CadastrarEvento cadastrarEvento) {
+		Usuario usuario = new Usuario();
 		UsuarioEvento usuarioEvento = new UsuarioEvento();
-		CadastrarEvento cadastrarEvento2 = new CadastrarEvento();
-		
+		Evento evento = new Evento();
 		usuarioEventoRepositorio.save(usuarioEvento);
-		usuarioEvento.setParticipante(cadastrarEvento2.getUsuario());
-		usuarioEvento.setEvento(cadastrarEvento2.getEvento());
+		usuarioEvento.setParticipante(cadastrarEvento.getUsuario());
+		usuarioEvento.setEvento(cadastrarEvento.getEvento());
 	}
 }

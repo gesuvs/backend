@@ -26,7 +26,6 @@ public class EventoController {
 	@Autowired
 	private EventoService eventoService;
 	
-	
 	@PostMapping("/eventos")
 	public ResponseEntity<CadastrarEvento> cadastraEvento(@RequestBody CadastrarEvento cadastrarEvento) {
 		eventoService.cadastrarEvento(cadastrarEvento);

@@ -36,14 +36,13 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Setter
 @Entity
 @Table(name = "tbd_usuario")
-public class Usuario implements UserDetails{
+public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
-	private Long idUsuario;	
+	private Long idUsuario;
 
 	@NotNull
 	@Column(name = "nome")
@@ -69,8 +68,6 @@ public class Usuario implements UserDetails{
 
 	@OneToMany(mappedBy = "organizador")
 	private List<Evento> evento;
-	
-
 
 //	@NotNull
 //	@CreationTimestamp
@@ -82,6 +79,18 @@ public class Usuario implements UserDetails{
 //	@Column(name = "col_alteradoEm")
 //	private Date alteradoEm;
 	
+	
+	public Usuario(String nome, String usuario, String celular, String senha) {
+		this.nome = nome;
+		this.usuario = usuario;
+		this.celular = celular;
+		this.senha = senha;
+	}
+	
+	public Usuario() {
+	}
+	
+
 	public String getNome() {
 		return nome;
 	}
@@ -114,8 +123,6 @@ public class Usuario implements UserDetails{
 		this.senha = senha;
 	}
 
-	
-	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
