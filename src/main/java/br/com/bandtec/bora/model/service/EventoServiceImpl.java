@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.bandtec.bora.model.dto.CadastrarEvento;
 import br.com.bandtec.bora.model.entity.Evento;
 import br.com.bandtec.bora.model.entity.Usuario;
+import br.com.bandtec.bora.model.entity.UsuarioEvento;
 import br.com.bandtec.bora.repository.EventoRepositorio;
+import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
 
 @Service
 public class EventoServiceImpl implements EventoService{
@@ -16,11 +19,7 @@ public class EventoServiceImpl implements EventoService{
 	private EventoRepositorio eventoRepositorio;
 
 	@Autowired
-	private EventoService eventoService;
-
-	@Autowired
 	private UsuarioEventoRepositorio usuarioEventoRepositorio;
-	
 	
 	@Override
 	public Evento cadastrarEvento(Evento evento) {
@@ -37,18 +36,26 @@ public class EventoServiceImpl implements EventoService{
 		return eventoRepositorio.save(evento);
 	}
 
-//	@Override
-//	public List<Evento> buscarEventoPorNome(String nomeEvento) {
-//		return (List<Evento>) eventoRepositorio.findbyNome(nomeEvento);
-//	}
+	@Override
+	public List<Evento> buscarEventoPorNome(String nomeEvento) {
+		return (List<Evento>) eventoRepositorio.findByNome(nomeEvento);
+	}
 
 	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {
-		return eventoRepositorio.findByUsuario(usuario.getUsuario());
+		return eventoRepositorio.findByOrganizador(usuario.getUsuario());
 	}
 	
 	public List<Evento> buscarTodosEventos(Evento evento) {
 		return eventoRepositorio.findAll();
 	}
-	
 
+	@Override
+	public void cadastrarEvento(CadastrarEvento cadastrarEvento) {
+		UsuarioEvento usuarioEvento = new UsuarioEvento();
+		CadastrarEvento cadastrarEvento2 = new CadastrarEvento();
+		
+		usuarioEventoRepositorio.save(usuarioEvento);
+		usuarioEvento.setParticipante(cadastrarEvento2.getUsuario());
+		usuarioEvento.setEvento(cadastrarEvento2.getEvento());
+	}
 }

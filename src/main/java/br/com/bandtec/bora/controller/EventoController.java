@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.bandtec.bora.model.dto.CadastrarEvento;
 import br.com.bandtec.bora.model.entity.Evento;
 import br.com.bandtec.bora.model.excecoes.DomainException;
 import br.com.bandtec.bora.model.service.EventoService;
@@ -26,8 +28,9 @@ public class EventoController {
 	
 	
 	@PostMapping("/eventos")
-	public ResponseEntity<Evento> cadastraEvento(@RequestBody Evento evento) {
-		return ResponseEntity.ok(eventoService.cadastrarEvento(evento));
+	public ResponseEntity<CadastrarEvento> cadastraEvento(@RequestBody CadastrarEvento cadastrarEvento) {
+		eventoService.cadastrarEvento(cadastrarEvento);
+		return ResponseEntity.ok().build();
 	}
 	
 	@PutMapping("/eventos/{idEvento}")
@@ -36,16 +39,16 @@ public class EventoController {
 		return ResponseEntity.ok(eventoService.atualizarEvento(idEvento, evento));
 	}
 	
-//	@GetMapping("eventos/{nomeEvento}")
-//	public ResponseEntity<List<Evento>> buscarEventoPorNome(@PathVariable(value = "nomeEvento") String nomeEvento) {
-//		return ResponseEntity.ok(eventoService.buscarEventoPorNome(nomeEvento));
-//
-//	}
+	@GetMapping("eventos/{nomeEvento}")
+	public ResponseEntity<List<Evento>> buscarEventoPorNome(@PathVariable(value = "nomeEvento") String nomeEvento) {
+		return ResponseEntity.ok(eventoService.buscarEventoPorNome(nomeEvento));
+
+	}
 	
 	
 	@GetMapping("/eventos/{usuario}")
 	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {
-		return eventoService.buscarEventosPorUsuario(evento.getUsuario());
+		return eventoService.buscarEventosPorUsuario(evento.getOrganizador());
 	}
 	
 	@GetMapping("/eventos")

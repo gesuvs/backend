@@ -27,7 +27,7 @@ public class Evento {
 	@JoinColumn(name="id_organizador")
 	private Usuario organizador;
 	
-	@NotNull
+//	@NotNull
 	@Column(name = "nome")
 	private String nome;
 
@@ -48,13 +48,6 @@ public class Evento {
 		this.idEvento = idEvento;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 
 	public String getNome() {
 		return nome;

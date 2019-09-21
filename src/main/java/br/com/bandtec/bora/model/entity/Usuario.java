@@ -38,6 +38,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Table(name = "tbd_usuario")
 public class Usuario implements UserDetails{
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
@@ -65,8 +67,10 @@ public class Usuario implements UserDetails{
 	@Column(name = "senha")
 	private String senha;
 
-//	@OneToMany(mappedBy = "usuario")
-//	private List<Sala> sala;
+	@OneToMany(mappedBy = "organizador")
+	private List<Evento> evento;
+	
+
 
 //	@NotNull
 //	@CreationTimestamp
