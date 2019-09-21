@@ -7,11 +7,12 @@ import org.springframework.stereotype.Service;
 import br.com.bandtec.bora.model.dto.CadastrarEvento;
 import br.com.bandtec.bora.model.entity.Evento;
 import br.com.bandtec.bora.model.entity.Usuario;
+import br.com.bandtec.bora.model.entity.UsuarioEvento;
 
 @Service
 public interface EventoService {
 	
-	Evento cadastrarEvento(Evento evento);
+	Evento criarEvento(Evento evento);
 	
 	Evento atualizarEvento(Long idEvento, Evento evento);
 
@@ -23,8 +24,5 @@ public interface EventoService {
 
 	void cadastrarEvento(CadastrarEvento cadastrarEvento);
 
-	
-	
-	
-	
+		
 }

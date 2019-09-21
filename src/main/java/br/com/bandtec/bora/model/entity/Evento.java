@@ -38,7 +38,7 @@ public class Evento {
 	private String categoria;
 	
 	@Column(name = "dataHora")
-	private Long dataHora;
+	private String dataHora;
 	
 	@Column(name = "endereco")
 	private String endereco;
@@ -67,11 +67,11 @@ public class Evento {
 		this.categoria = categoria;
 	}
 
-	public Long getDataHora() {
+	public String getDataHora() {
 		return dataHora;
 	}
 
-	public void setDataHora(Long dataHora) {
+	public void setDataHora(String dataHora) {
 		this.dataHora = dataHora;
 	}
 
@@ -85,6 +85,10 @@ public class Evento {
 
 	public Usuario getOrganizador() {
 		return organizador;
+	}
+
+	public void setOrganizador(Usuario organizador) {
+		this.organizador = organizador;
 	}
 
 	public void setEndereco(Usuario organizador) {

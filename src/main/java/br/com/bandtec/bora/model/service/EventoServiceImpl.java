@@ -2,6 +2,8 @@ package br.com.bandtec.bora.model.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class EventoServiceImpl implements EventoService{
 	private UsuarioEventoRepositorio usuarioEventoRepositorio;
 	
 	@Override
-	public Evento cadastrarEvento(Evento evento) {
+	public Evento criarEvento(Evento evento) {
 		return eventoRepositorio.save(evento); 
 	}
 
@@ -49,13 +51,35 @@ public class EventoServiceImpl implements EventoService{
 		return eventoRepositorio.findAll();
 	}
 
+//	@Transactional
+//	public void cadastrarEvento(UsuarioEvento evento) {
+//		usuarioEventoRepositorio.save(evento);
+//		evento.setParticipante(new CadastrarEvento().getUsuario());
+//		evento.setEvento(new CadastrarEvento().getEvento());
+//	}
+
 	@Override
 	public void cadastrarEvento(CadastrarEvento cadastrarEvento) {
-		Usuario usuario = new Usuario();
-		UsuarioEvento usuarioEvento = new UsuarioEvento();
 		Evento evento = new Evento();
+		UsuarioEvento usuarioEvento = new UsuarioEvento();
 		usuarioEventoRepositorio.save(usuarioEvento);
-		usuarioEvento.setParticipante(cadastrarEvento.getUsuario());
-		usuarioEvento.setEvento(cadastrarEvento.getEvento());
+//		Usuario usuario = new Usuario();
+//		cadastrarEvento.setUsuario(new Usuario());
+//		cadastrarEvento.setEvento(new Evento());
+//		Evento evento = new Evento();
+//		evento.setNome(cadastrarEvento.getNome());
+//		evento.setCategoria(cadastrarEvento.getCategoria());
+//		evento.setDataHora(cadastrarEvento.getDataHora());
+//		evento.setEndereco(cadastrarEvento.getEndereco());
+//		evento.setOrganizador(cadastrarEvento.getUsuario());
+//		eventoRepositorio.save(evento);
 	}
+
+//	@Override
+//	public void cadastrarEvento(CadastrarEvento cadastrarEvento) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+
+	
 }

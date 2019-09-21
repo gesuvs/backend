@@ -26,25 +26,34 @@ public class UsuarioEvento {
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@JoinColumn(name="usuario_id")
-	private Usuario participante;
+	private Usuario participantes;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@JoinColumn(name="evento_id")
-	private Evento evento;
-
-	public Usuario getParticipante() {
-		return participante;
+	private Evento eventos;
+	
+	public UsuarioEvento() {		
+	}
+	
+	public UsuarioEvento(Usuario participantes, Evento eventos) {
+		this.participantes = participantes;
+		this.eventos = eventos;
+	}
+	
+	public Usuario getParticipantes() {
+		return participantes;
 	}
 
-	public void setParticipante(Usuario participante) {
-		this.participante = participante;
+	public void setParticipantes(Usuario participantes) {
+		this.participantes = participantes;
 	}
 
-	public Evento getEvento() {
-		return evento;
+	public Evento getEventos() {
+		return eventos;
 	}
 
-	public void setEvento(Evento evento) {
-		this.evento = evento;
+	public void setEventos(Evento eventos) {
+		this.eventos = eventos;
 	}
+
 }
