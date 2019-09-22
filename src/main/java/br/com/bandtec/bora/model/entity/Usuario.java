@@ -54,26 +54,26 @@ public class Usuario implements UserDetails {
 	@Column(name = "id_usuario")
 	private Long idUsuario;
 
-	@NotNull
-	@Column(name = "nome")
-	@Pattern(regexp = "^[a-zA-Z\\s]+", message = "Voce tem certeza que seu nome ta correto?")
+//	@NotNull
+//	@Column(name = "nome")
+//	@Pattern(regexp = "^[a-zA-Z\\s]+", message = "Voce tem certeza que seu nome ta correto?")
 	private String nome;
 
-	@NotNull
-	@NotEmpty(message = "Nome do usuario nao pode ficar vazio")
-	@Size(min = 2, max = 32, message = "Nome do usuario nao pode ser menor que 2 ou maior que 32 caracteres")
-	@Column(name = "usuario", unique = true)
+//	@NotNull
+//	@NotEmpty(message = "Nome do usuario nao pode ficar vazio")
+//	@Size(min = 2, max = 32, message = "Nome do usuario nao pode ser menor que 2 ou maior que 32 caracteres")
+//	@Column(name = "usuario", unique = true)
 	private String usuario;
 
-	@NotNull
-	@Pattern(regexp = "\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d", message = "voce tem certeza que seu numero de celular esta correto?")
-	@NotEmpty(message = "Não esqueça de preencher o numero do celular")
-	@Column(name = "celular")
+//	@NotNull
+//	@Pattern(regexp = "\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d", message = "voce tem certeza que seu numero de celular esta correto?")
+//	@NotEmpty(message = "Não esqueça de preencher o numero do celular")
+//	@Column(name = "celular")
 	private String celular;
 
-	@NotNull
-	@NotEmpty(message = "Voce esqueceu da senha")
-	@Column(name = "senha")
+//	@NotNull
+//	@NotEmpty(message = "Voce esqueceu da senha")
+//	@Column(name = "senha")
 	private String senha;
 
 	@OneToMany(mappedBy = "usuario")

@@ -37,32 +37,25 @@ public class Evento {
 	@Column(name = "id_evento")
 	private Long idEvento;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
-
-//	@OneToMany(mappedBy = "evento")
-//	private List<UsuarioEvento> todosEventos;
-
-	@Column(name = "nome")
 	private String nome;
 
-	@Column(name = "categoria")
 	private String categoria;
 
-	@Column(name = "dataHora")
 	private String dataHora;
 
-	@Column(name = "endereco")
 	private String endereco;
-
-	public Evento(Usuario usuario, String nome, String categoria, String dataHora, String endereco) {
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
+	
+	public Evento(Usuario usuario) {
 		this.usuario = usuario;
-		this.nome = nome;
-		this.categoria = categoria;
-		this.dataHora = dataHora;
-		this.endereco = endereco;
 	}
+
+	
+//	@OneToMany(mappedBy = "evento")
+//	private List<UsuarioEvento> todosEventos;
 
 	public Long getIdEvento() {
 		return idEvento;

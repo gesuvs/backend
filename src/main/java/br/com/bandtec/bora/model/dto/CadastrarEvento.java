@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,12 +19,18 @@ import lombok.Setter;
 public class CadastrarEvento {
 
 	private Usuario usuario;
+	private Long id;
 	private Evento evento;
 
 	public Usuario getUsuario() {
 		return usuario;
 	}
-	
+
+	public CadastrarEvento(Long usuario, Evento evento) {
+		this.id = usuario;
+		this.evento = evento;
+	}
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
@@ -37,5 +42,5 @@ public class CadastrarEvento {
 	public void setEvento(Evento evento) {
 		this.evento = evento;
 	}
-
+	
 }

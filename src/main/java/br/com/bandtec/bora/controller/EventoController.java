@@ -64,14 +64,14 @@ public class EventoController {
 		return eventoService.buscarEventosPorUsuario(evento.getUsuario());
 	}
 
-//	@GetMapping("/eventos")
-//	public List<Evento> buscarTodosEventos(Evento evento) {
-//		return eventoService.buscarTodosEventos(evento);
-//	}
-	
 	@GetMapping("/eventos")
-	public List<UsuarioEvento> buscarTodosEventos(UsuarioEvento usuarioEvento) {
-		return repositorio.findAll();
+	public List<Evento> buscarTodosEventos(Evento evento) {
+		return eventoService.buscarTodosEventos(evento);
 	}
+	
+//	@GetMapping("/eventos")
+//	public List<UsuarioEvento> buscarTodosEventos(UsuarioEvento usuarioEvento) {
+//		return repositorio.findAll();
+//	}
 
 }

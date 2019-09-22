@@ -38,7 +38,7 @@ public class UsuarioEvento {
 	@Column(name = "id_usuario_evento")
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
@@ -46,9 +46,9 @@ public class UsuarioEvento {
 	@JoinColumn(name = "evento_id")
 	private Evento evento;
 
-	public UsuarioEvento(CadastrarEvento cadastrarEvento) {
-		cadastrarEvento.setUsuario(getUsuario());
-		cadastrarEvento.setEvento(getEvento());
+	public UsuarioEvento(Usuario usuario) {
+		this.id = usuario.getIdUsuario();
+		this.usuario = usuario;
 	}
 
 	public Usuario getUsuario() {
@@ -65,12 +65,6 @@ public class UsuarioEvento {
 
 	public void setEvento(Evento evento) {
 		this.evento = evento;
-	}
-
-	public void criarEvento(CadastrarEvento cadastrarEvento) {
-		UsuarioEvento usuarioEvento = new UsuarioEvento();
-		cadastrarEvento.setUsuario(usuarioEvento.getUsuario());
-		cadastrarEvento.setEvento(usuarioEvento.getEvento());
 	}
 
 }
