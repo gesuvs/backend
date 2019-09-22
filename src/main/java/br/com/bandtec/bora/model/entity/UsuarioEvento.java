@@ -38,13 +38,11 @@ public class UsuarioEvento {
 	@Column(name = "id_usuario_evento")
 	private Long id;
 
-	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 
-	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "evento_id")
 	private Evento evento;
 

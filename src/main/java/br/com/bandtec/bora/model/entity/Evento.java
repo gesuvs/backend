@@ -31,31 +31,39 @@ import lombok.Setter;
 @Entity
 @Table(name = "tbd_evento")
 public class Evento {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_evento")
 	private Long idEvento;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_usuario")	
+
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
-	
-	@OneToMany(mappedBy = "evento")
-	private List<UsuarioEvento> todosEventos;
-	
+
+//	@OneToMany(mappedBy = "evento")
+//	private List<UsuarioEvento> todosEventos;
+
 	@Column(name = "nome")
 	private String nome;
 
 	@Column(name = "categoria")
 	private String categoria;
-	
+
 	@Column(name = "dataHora")
 	private String dataHora;
-	
+
 	@Column(name = "endereco")
 	private String endereco;
-	
+
+	public Evento(Usuario usuario, String nome, String categoria, String dataHora, String endereco) {
+		this.usuario = usuario;
+		this.nome = nome;
+		this.categoria = categoria;
+		this.dataHora = dataHora;
+		this.endereco = endereco;
+	}
+
 	public Long getIdEvento() {
 		return idEvento;
 	}
@@ -103,5 +111,5 @@ public class Evento {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	
+
 }

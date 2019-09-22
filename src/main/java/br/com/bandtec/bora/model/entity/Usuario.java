@@ -76,11 +76,11 @@ public class Usuario implements UserDetails {
 	@Column(name = "senha")
 	private String senha;
 
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuario")
 	private List<Evento> eventosCriado;
 
-	@OneToMany(mappedBy = "usuario")
-	private List<UsuarioEvento> todosEventos;
+//	@OneToMany(mappedBy = "usuario")
+//	private List<UsuarioEvento> todosEventos;
 	
 
 //	@NotNull
@@ -96,18 +96,9 @@ public class Usuario implements UserDetails {
 	
 //	public Usuario(Long idUsuario)
 	
-	
-	public void addEvento(Evento evento) {
-		eventosCriado.add(evento);
-		evento.setUsuario(this);
+	public Usuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
-	
-//	@JsonCreator
-//	public Usuario(@JsonProperty("idUsuario") Long idUsuario) {
-//		this.idUsuario = idUsuario;
-//	}
-	
-	
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -157,13 +148,13 @@ public class Usuario implements UserDetails {
 		this.eventosCriado = eventosCriado;
 	}
 
-	public List<UsuarioEvento> getTodosEventos() {
-		return todosEventos;
-	}
-
-	public void setTodosEventos(List<UsuarioEvento> todosEventos) {
-		this.todosEventos = todosEventos;
-	}
+//	public List<UsuarioEvento> getTodosEventos() {
+//		return todosEventos;
+//	}
+//
+//	public void setTodosEventos(List<UsuarioEvento> todosEventos) {
+//		this.todosEventos = todosEventos;
+//	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -63,8 +63,6 @@ public class EventoServiceImpl implements EventoService{
 	public void cadastrarEvento(CadastrarEvento cadastrarEvento) {
 		UsuarioEvento usuarioEvento = new UsuarioEvento();
 		usuarioEventoRepositorio.save(usuarioEvento);
-		Usuario usuario = new Usuario();
-		
 //		Evento evento = new Evento();
 //		evento.setNome("nome");
 //		evento.setCategoria("categoria");
