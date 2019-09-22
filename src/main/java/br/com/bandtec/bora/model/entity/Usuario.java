@@ -1,5 +1,5 @@
 package br.com.bandtec.bora.model.entity;
-
+	
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -21,12 +21,20 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import br.com.bandtec.bora.model.entity.UsuarioEvento;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -34,6 +42,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Data
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "tbd_usuario")
 public class Usuario implements UserDetails {
@@ -66,8 +76,12 @@ public class Usuario implements UserDetails {
 	@Column(name = "senha")
 	private String senha;
 
-	@OneToMany(mappedBy = "organizador")
-	private List<Evento> evento;
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private List<Evento> eventosCriado;
+
+	@OneToMany(mappedBy = "usuario")
+	private List<UsuarioEvento> todosEventos;
+	
 
 //	@NotNull
 //	@CreationTimestamp
@@ -80,16 +94,28 @@ public class Usuario implements UserDetails {
 //	private Date alteradoEm;
 	
 	
-	public Usuario(String nome, String usuario, String celular, String senha) {
-		this.nome = nome;
-		this.usuario = usuario;
-		this.celular = celular;
-		this.senha = senha;
+//	public Usuario(Long idUsuario)
+	
+	
+	public void addEvento(Evento evento) {
+		eventosCriado.add(evento);
+		evento.setUsuario(this);
 	}
 	
-	public Usuario() {
-	}
+//	@JsonCreator
+//	public Usuario(@JsonProperty("idUsuario") Long idUsuario) {
+//		this.idUsuario = idUsuario;
+//	}
 	
+	
+
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
 	public String getNome() {
 		return nome;
@@ -121,6 +147,22 @@ public class Usuario implements UserDetails {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public List<Evento> getEventosCriado() {
+		return eventosCriado;
+	}
+
+	public void setEventosCriado(List<Evento> eventosCriado) {
+		this.eventosCriado = eventosCriado;
+	}
+
+	public List<UsuarioEvento> getTodosEventos() {
+		return todosEventos;
+	}
+
+	public void setTodosEventos(List<UsuarioEvento> todosEventos) {
+		this.todosEventos = todosEventos;
 	}
 
 	@Override
@@ -164,6 +206,4 @@ public class Usuario implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
-
 }

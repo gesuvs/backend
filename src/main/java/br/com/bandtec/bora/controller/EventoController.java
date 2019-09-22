@@ -21,6 +21,7 @@ import br.com.bandtec.bora.model.entity.UsuarioEvento;
 import br.com.bandtec.bora.model.excecoes.DomainException;
 import br.com.bandtec.bora.model.service.EventoService;
 import br.com.bandtec.bora.model.service.UsuarioService;
+import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
 
 @RestController
 @RequestMapping("/api")
@@ -28,9 +29,13 @@ public class EventoController {
 
 	@Autowired
 	private EventoService eventoService;
+	
+	@Autowired
+	private UsuarioEventoRepositorio repositorio;
 
 	@PostMapping("/eventos")
 	public ResponseEntity<CadastrarEvento> evento(@RequestBody CadastrarEvento cadastrarEvento) {
+//		eventoService.cadastrarEvento(cadastrarEvento);
 		eventoService.cadastrarEvento(cadastrarEvento);
 		return ResponseEntity.ok().build();
 	}
@@ -56,12 +61,17 @@ public class EventoController {
 
 	@GetMapping("/eventos/{usuario}")
 	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {
-		return eventoService.buscarEventosPorUsuario(evento.getOrganizador());
+		return eventoService.buscarEventosPorUsuario(evento.getUsuario());
 	}
 
+//	@GetMapping("/eventos")
+//	public List<Evento> buscarTodosEventos(Evento evento) {
+//		return eventoService.buscarTodosEventos(evento);
+//	}
+	
 	@GetMapping("/eventos")
-	public List<Evento> buscarTodosEventos(Evento evento) {
-		return eventoService.buscarTodosEventos(evento);
+	public List<UsuarioEvento> buscarTodosEventos(UsuarioEvento usuarioEvento) {
+		return repositorio.findAll();
 	}
 
 }

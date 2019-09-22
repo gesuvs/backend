@@ -44,42 +44,38 @@ public class EventoServiceImpl implements EventoService{
 	}
 
 	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {
-		return eventoRepositorio.findByOrganizador(usuario.getUsuario());
+		return eventoRepositorio.findByUsuario(usuario.getUsuario());
 	}
 	
 	public List<Evento> buscarTodosEventos(Evento evento) {
 		return eventoRepositorio.findAll();
 	}
 
-//	@Transactional
+
 //	public void cadastrarEvento(UsuarioEvento evento) {
 //		usuarioEventoRepositorio.save(evento);
 //		evento.setParticipante(new CadastrarEvento().getUsuario());
 //		evento.setEvento(new CadastrarEvento().getEvento());
 //	}
 
+	@Transactional
 	@Override
 	public void cadastrarEvento(CadastrarEvento cadastrarEvento) {
-		Evento evento = new Evento();
 		UsuarioEvento usuarioEvento = new UsuarioEvento();
 		usuarioEventoRepositorio.save(usuarioEvento);
-//		Usuario usuario = new Usuario();
-//		cadastrarEvento.setUsuario(new Usuario());
-//		cadastrarEvento.setEvento(new Evento());
+		Usuario usuario = new Usuario();
+		
 //		Evento evento = new Evento();
-//		evento.setNome(cadastrarEvento.getNome());
-//		evento.setCategoria(cadastrarEvento.getCategoria());
-//		evento.setDataHora(cadastrarEvento.getDataHora());
-//		evento.setEndereco(cadastrarEvento.getEndereco());
-//		evento.setOrganizador(cadastrarEvento.getUsuario());
-//		eventoRepositorio.save(evento);
+//		evento.setNome("nome");
+//		evento.setCategoria("categoria");
+//		evento.setDataHora("datahora");
+//		evento.setEndereco("endereco");
+//		evento.setUsuario(cadastrarEvento.getUsuario());
+		
+		//usuario.setIdUsuario(cadastrarEvento.getUsuario().getIdUsuario());
+		usuarioEvento.setUsuario(cadastrarEvento.getUsuario());
+		usuarioEvento.setEvento(cadastrarEvento.getEvento());
 	}
-
-//	@Override
-//	public void cadastrarEvento(CadastrarEvento cadastrarEvento) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-
 	
 }
+	

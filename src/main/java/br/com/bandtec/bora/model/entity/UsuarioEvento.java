@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +15,20 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import br.com.bandtec.bora.model.dto.CadastrarEvento;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "tbd_usuario_evento")
 public class UsuarioEvento {
@@ -24,36 +38,41 @@ public class UsuarioEvento {
 	@Column(name = "id_usuario_evento")
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	@JoinColumn(name="usuario_id")
-	private Usuario participantes;
+	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	@JoinColumn(name="evento_id")
-	private Evento eventos;
-	
-	public UsuarioEvento() {		
-	}
-	
-	public UsuarioEvento(Usuario participantes, Evento eventos) {
-		this.participantes = participantes;
-		this.eventos = eventos;
-	}
-	
-	public Usuario getParticipantes() {
-		return participantes;
+	// @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "evento_id")
+	private Evento evento;
+
+	public UsuarioEvento(CadastrarEvento cadastrarEvento) {
+		cadastrarEvento.setUsuario(getUsuario());
+		cadastrarEvento.setEvento(getEvento());
 	}
 
-	public void setParticipantes(Usuario participantes) {
-		this.participantes = participantes;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public Evento getEventos() {
-		return eventos;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
-	public void setEventos(Evento eventos) {
-		this.eventos = eventos;
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
+	}
+
+	public void criarEvento(CadastrarEvento cadastrarEvento) {
+		UsuarioEvento usuarioEvento = new UsuarioEvento();
+		cadastrarEvento.setUsuario(usuarioEvento.getUsuario());
+		cadastrarEvento.setEvento(usuarioEvento.getEvento());
 	}
 
 }

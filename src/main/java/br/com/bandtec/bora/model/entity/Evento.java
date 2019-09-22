@@ -17,6 +17,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "tbd_evento")
 public class Evento {
@@ -26,11 +37,13 @@ public class Evento {
 	@Column(name = "id_evento")
 	private Long idEvento;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	@JoinColumn(name="id_organizador")
-	private Usuario organizador;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="id_usuario")	
+	private Usuario usuario;
 	
-	//@NotNull
+	@OneToMany(mappedBy = "evento")
+	private List<UsuarioEvento> todosEventos;
+	
 	@Column(name = "nome")
 	private String nome;
 
@@ -42,13 +55,21 @@ public class Evento {
 	
 	@Column(name = "endereco")
 	private String endereco;
-
+	
 	public Long getIdEvento() {
 		return idEvento;
 	}
 
 	public void setIdEvento(Long idEvento) {
 		this.idEvento = idEvento;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getNome() {
@@ -82,16 +103,5 @@ public class Evento {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
-	public Usuario getOrganizador() {
-		return organizador;
-	}
-
-	public void setOrganizador(Usuario organizador) {
-		this.organizador = organizador;
-	}
-
-	public void setEndereco(Usuario organizador) {
-		this.organizador = organizador;
-	}
+	
 }
