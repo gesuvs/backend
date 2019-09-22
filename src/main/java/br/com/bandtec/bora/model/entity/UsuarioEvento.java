@@ -4,31 +4,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import br.com.bandtec.bora.model.dto.CadastrarEvento;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Data
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "tbd_usuario_evento")
 public class UsuarioEvento {
@@ -38,17 +21,22 @@ public class UsuarioEvento {
 	@Column(name = "id_usuario_evento")
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@ManyToOne
 	@JoinColumn(name = "usuario_id")
+	@JsonIgnoreProperties
 	private Usuario usuario;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "evento_id")
+	@JsonIgnoreProperties
 	private Evento evento;
 
-	public UsuarioEvento(Usuario usuario) {
-		this.id = usuario.getIdUsuario();
+	public UsuarioEvento() {
+	}
+
+	public UsuarioEvento(Usuario usuario, Evento evento) {
 		this.usuario = usuario;
+		this.evento = evento;
 	}
 
 	public Usuario getUsuario() {

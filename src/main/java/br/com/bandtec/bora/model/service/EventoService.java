@@ -12,8 +12,6 @@ import br.com.bandtec.bora.model.entity.UsuarioEvento;
 @Service
 public interface EventoService {
 	
-	Evento criarEvento(Evento evento);
-	
 	Evento atualizarEvento(Long idEvento, Evento evento);
 
 	List<Evento> buscarEventoPorNome(String nomeEvento);

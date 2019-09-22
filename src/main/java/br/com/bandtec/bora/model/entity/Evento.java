@@ -1,7 +1,5 @@
 package br.com.bandtec.bora.model.entity;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,23 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-@Getter
-@Setter
 @Entity
 @Table(name = "tbd_evento")
 public class Evento {
@@ -44,18 +27,21 @@ public class Evento {
 	private String dataHora;
 
 	private String endereco;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "id_usuario")
-	private Usuario usuario;
-	
-	public Evento(Usuario usuario) {
-		this.usuario = usuario;
+	@JoinColumn(name = "organizador_id")
+	private Usuario organizador;
+
+	public Evento() {
 	}
 
-	
-//	@OneToMany(mappedBy = "evento")
-//	private List<UsuarioEvento> todosEventos;
+	public Evento(String nome, String categoria, String dataHora, String endereco, Usuario organizador) {
+		this.nome = nome;
+		this.categoria = categoria;
+		this.dataHora = dataHora;
+		this.endereco = endereco;
+		this.organizador = organizador;
+	}
 
 	public Long getIdEvento() {
 		return idEvento;
@@ -63,14 +49,6 @@ public class Evento {
 
 	public void setIdEvento(Long idEvento) {
 		this.idEvento = idEvento;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public String getNome() {
@@ -103,6 +81,14 @@ public class Evento {
 
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
+	}
+
+	public Usuario getOrganizador() {
+		return organizador;
+	}
+
+	public void setUsuario(Usuario organizador) {
+		this.organizador = organizador;
 	}
 
 }

@@ -15,18 +15,13 @@ import br.com.bandtec.bora.repository.EventoRepositorio;
 import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
 
 @Service
-public class EventoServiceImpl implements EventoService{
+public class EventoServiceImpl implements EventoService {
 
 	@Autowired
 	private EventoRepositorio eventoRepositorio;
 
 	@Autowired
 	private UsuarioEventoRepositorio usuarioEventoRepositorio;
-	
-	@Override
-	public Evento criarEvento(Evento evento) {
-		return eventoRepositorio.save(evento); 
-	}
 
 	@Override
 	public Evento atualizarEvento(Long idEvento, Evento evento) {
@@ -44,30 +39,32 @@ public class EventoServiceImpl implements EventoService{
 	}
 
 	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {
-		return eventoRepositorio.findByUsuario(usuario.getUsuario());
+		return eventoRepositorio.findByOrganizador(usuario.getApelido());
 	}
-	
+
 	public List<Evento> buscarTodosEventos(Evento evento) {
 		return eventoRepositorio.findAll();
 	}
 
 
-//	public void cadastrarEvento(UsuarioEvento evento) {
-//		usuarioEventoRepositorio.save(evento);
-//		evento.setParticipante(new CadastrarEvento().getUsuario());
-//		evento.setEvento(new CadastrarEvento().getEvento());
-//	}
-
 	@Transactional
 	@Override
 	public void cadastrarEvento(CadastrarEvento cadastrarEvento) {
+		Usuario usuario = new Usuario();
 		UsuarioEvento usuarioEvento = new UsuarioEvento();
+		Evento evento = new Evento();
+		usuario.setIdUsuario(cadastrarEvento.getUsuario().getIdUsuario());
+		
+		evento.setCategoria(cadastrarEvento.getEvento().getCategoria());
+		evento.setDataHora(cadastrarEvento.getEvento().getDataHora());
+		evento.setEndereco(cadastrarEvento.getEvento().getEndereco());
+		evento.setNome(cadastrarEvento.getEvento().getNome());
+		evento.setUsuario(usuario);
+
 		usuarioEventoRepositorio.save(usuarioEvento);
-		//usuarioEvento.criarEvento(cadastrarEvento);
-		usuarioEvento.setUsuario(cadastrarEvento.getUsuario());
-		usuarioEvento.setEvento(cadastrarEvento.getEvento());
-//		
+		usuarioEvento.setEvento(evento);
+		usuarioEvento.setUsuario(usuario);
+		
 	}
-	
+
 }
-	

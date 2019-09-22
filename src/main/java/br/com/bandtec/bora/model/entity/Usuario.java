@@ -1,101 +1,58 @@
 package br.com.bandtec.bora.model.entity;
-	
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
 
+import java.util.Collection;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-@Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "tbd_usuario")
 public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
 	private Long idUsuario;
 
-//	@NotNull
-//	@Column(name = "nome")
-//	@Pattern(regexp = "^[a-zA-Z\\s]+", message = "Voce tem certeza que seu nome ta correto?")
 	private String nome;
 
-//	@NotNull
-//	@NotEmpty(message = "Nome do usuario nao pode ficar vazio")
-//	@Size(min = 2, max = 32, message = "Nome do usuario nao pode ser menor que 2 ou maior que 32 caracteres")
-//	@Column(name = "usuario", unique = true)
-	private String usuario;
+	private String apelido;
 
-//	@NotNull
-//	@Pattern(regexp = "\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d", message = "voce tem certeza que seu numero de celular esta correto?")
-//	@NotEmpty(message = "Não esqueça de preencher o numero do celular")
-//	@Column(name = "celular")
 	private String celular;
 
-//	@NotNull
-//	@NotEmpty(message = "Voce esqueceu da senha")
-//	@Column(name = "senha")
 	private String senha;
 
-	@OneToMany(mappedBy = "usuario")
+	@OneToMany(mappedBy = "organizador")
+	@JsonIgnoreProperties
 	private List<Evento> eventosCriado;
 
-//	@OneToMany(mappedBy = "usuario")
-//	private List<UsuarioEvento> todosEventos;
-	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnoreProperties
+	private List<UsuarioEvento> todosEventos;
 
-//	@NotNull
-//	@CreationTimestamp
-//	@Column(name = "col_cadastroEm")
-//	private Date cadastroEm;
-//
-//	@NotNull
-//	@UpdateTimestamp
-//	@Column(name = "col_alteradoEm")
-//	private Date alteradoEm;
-	
-	
-//	public Usuario(Long idUsuario)
-	
+	public Usuario() {
+	}
+
+	public Usuario(String nome, String apelido, String celular, String senha) {
+		this.nome = nome;
+		this.apelido = apelido;
+		this.celular = celular;
+		this.senha = senha;
+	}
+
 	public Usuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
@@ -116,12 +73,12 @@ public class Usuario implements UserDetails {
 		this.nome = nome;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getApelido() {
+		return apelido;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setApelido(String apelido) {
+		this.apelido = apelido;
 	}
 
 	public String getCelular() {
@@ -144,17 +101,9 @@ public class Usuario implements UserDetails {
 		return eventosCriado;
 	}
 
-	public void setEventosCriado(List<Evento> eventosCriado) {
-		this.eventosCriado = eventosCriado;
+	public List<UsuarioEvento> getTodosEventos() {
+		return todosEventos;
 	}
-
-//	public List<UsuarioEvento> getTodosEventos() {
-//		return todosEventos;
-//	}
-//
-//	public void setTodosEventos(List<UsuarioEvento> todosEventos) {
-//		this.todosEventos = todosEventos;
-//	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -171,7 +120,7 @@ public class Usuario implements UserDetails {
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return this.usuario;
+		return this.apelido;
 	}
 
 	@Override
