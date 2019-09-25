@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,12 +31,22 @@ public class Usuario implements UserDetails {
 	@Column(name = "id_usuario")
 	private Long idUsuario;
 
+	@Size(min = 2)
 	private String nome;
 
+	@Column(unique = true, length = 50)
+	@Size(min = 5)
 	private String apelido;
 
+	@Email
+	@NotEmpty
+	private String email;
+
+	@NotEmpty
 	private String celular;
 
+	@NotEmpty
+	@Size(min = 5)
 	private String senha;
 
 	@OneToMany(mappedBy = "organizador")
@@ -46,9 +60,12 @@ public class Usuario implements UserDetails {
 	public Usuario() {
 	}
 
-	public Usuario(String nome, String apelido, String celular, String senha) {
+	public Usuario(Long idUsuario, @Size(min = 2) String nome, @Size(min = 5) String apelido,
+			@Email @NotEmpty String email, @NotEmpty String celular, @NotEmpty @Size(min = 5) String senha) {
+		this.idUsuario = idUsuario;
 		this.nome = nome;
 		this.apelido = apelido;
+		this.email = email;
 		this.celular = celular;
 		this.senha = senha;
 	}

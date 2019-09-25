@@ -29,7 +29,7 @@ public class EventoServiceImpl implements EventoService {
 		evento.setNome(evento.getNome());
 		evento.setEndereco(evento.getEndereco());
 		evento.setCategoria(evento.getCategoria());
-		evento.setDataHora(evento.getDataHora());
+		evento.setDataHoraInicio(evento.getDataHoraInicio());
 		return eventoRepositorio.save(evento);
 	}
 
@@ -56,10 +56,10 @@ public class EventoServiceImpl implements EventoService {
 		usuario.setIdUsuario(cadastrarEvento.getUsuario().getIdUsuario());
 		
 		evento.setCategoria(cadastrarEvento.getEvento().getCategoria());
-		evento.setDataHora(cadastrarEvento.getEvento().getDataHora());
+		evento.setDataHoraInicio(cadastrarEvento.getEvento().getDataHoraInicio());
 		evento.setEndereco(cadastrarEvento.getEvento().getEndereco());
 		evento.setNome(cadastrarEvento.getEvento().getNome());
-		evento.setUsuario(usuario);
+		evento.setOrganizador(usuario);
 
 		usuarioEventoRepositorio.save(usuarioEvento);
 		usuarioEvento.setEvento(evento);
