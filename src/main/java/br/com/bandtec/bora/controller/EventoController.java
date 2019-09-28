@@ -20,7 +20,6 @@ import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
 import br.com.bandtec.bora.model.excecoes.DomainException;
 import br.com.bandtec.bora.model.service.EventoService;
-import br.com.bandtec.bora.model.service.UsuarioService;
 import br.com.bandtec.bora.repository.UsuarioEventoRepositorio;
 
 @RestController

@@ -1,19 +1,35 @@
-	package br.com.bandtec.bora.model.service;
+package br.com.bandtec.bora.model.service;
 
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.bandtec.bora.model.entity.Usuario;
+import br.com.bandtec.bora.repository.UsuarioRepositorio;
 
 @Service
-public interface UsuarioService {
-	Usuario cadastrarUsuario(Usuario usuario);
+public class UsuarioService {
 
-	List<Usuario> buscarTodosUsuarios();
-	
-	Usuario buscarUsuarioPeloIdUsuario(Long idUsuario);
-	
-	void deletarUsuario(Long idUsuario);
+	@Autowired
+	private UsuarioRepositorio usuarioRepositorio;
 
+	
+	public List<Usuario> buscarTodosUsuarios() {
+		return (List<Usuario>) usuarioRepositorio.findAll();
+	}
+	
+	
+	public Usuario cadastrarUsuario(Usuario usuario) {
+		return usuarioRepositorio.save(usuario);
+	}
+
+	
+	public Usuario buscarUsuarioPeloIdUsuario(Long idUsuario) {
+		return usuarioRepositorio.findById(idUsuario).orElse(null);
+	}
+
+	
+	public void deletarUsuario(Long idUsuario) {
+		usuarioRepositorio.deleteById(idUsuario);
+	}
 }

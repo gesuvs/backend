@@ -19,7 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "tbd_evento")
-public class Evento {
+public abstract class Evento {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
