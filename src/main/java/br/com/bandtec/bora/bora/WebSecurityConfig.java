@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,12 +26,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
 	@Autowired
 	private ImplementsUserDetailsService userDetailsService;
-	private Usuario usuario;
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
 		.antMatchers(HttpMethod.GET, "/").permitAll()
+		
+		.antMatchers(HttpMethod.POST, "/auth").permitAll()
 		
 		.antMatchers(HttpMethod.GET, "/api/eventos}").permitAll()
 		.antMatchers(HttpMethod.POST, "/api/eventos").permitAll()
@@ -41,8 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		
 		.anyRequest().authenticated()
-		.and().formLogin().permitAll()
-		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+		.and().csrf().disable()
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
     }
 	
@@ -52,7 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
-	
+// UM EXEMPLO DE AUTENTICAÇO EM MEMORIA COM SPRING SECURITY 
+//
 //    @Bean
 //    @Override
 //    public UserDetailsService userDetailsService() {
