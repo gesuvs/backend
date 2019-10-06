@@ -1,5 +1,7 @@
 package br.com.bandtec.bora.model.form;
 
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
 public class LoginForm {
 	
 	private String apelido;
@@ -17,6 +19,10 @@ public class LoginForm {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public UsernamePasswordAuthenticationToken converter() {
+		return new UsernamePasswordAuthenticationToken(apelido, senha);
 	}
 	
 	
