@@ -39,7 +39,6 @@ public class Usuario implements UserDetails {
 	private String apelido;
 
 	@Email
-	@NotEmpty
 	private String email;
 
 	@NotEmpty

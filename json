@@ -31,7 +31,7 @@ POST - http://localhost:8080/api/eventos
  
  {
 	"nome":"bruno",
-	"usuario":"bruno",
+	"apelido":"bruno",
 	"celular":"12345678911",
     "senha":"123"
  }
