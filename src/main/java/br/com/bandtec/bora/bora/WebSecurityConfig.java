@@ -48,6 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/").permitAll()
 		
 		.antMatchers(HttpMethod.POST, "/auth").permitAll()
+		.antMatchers(HttpMethod.GET, "/swagger-ui").permitAll()
+		.antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
 		
 		.antMatchers(HttpMethod.GET, "/api/eventos}").permitAll()
 		.antMatchers(HttpMethod.POST, "/api/eventos").permitAll()
@@ -69,6 +71,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(userDetailsService)
 		.passwordEncoder(new BCryptPasswordEncoder());
+	}
+	
+	
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/**.html", "/v2/api-docs", "/webjars/**", "/configuration/**", "/swagger-resources/**");	
 	}
 	
 // UM EXEMPLO DE AUTENTICAÇO EM MEMORIA COM SPRING SECURITY 
