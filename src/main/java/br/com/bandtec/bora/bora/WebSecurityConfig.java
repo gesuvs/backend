@@ -17,9 +17,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import br.com.bandtec.bora.model.entity.Usuario;
+import br.com.bandtec.bora.repository.UsuarioRepositorio;
 
 @Configuration
 @EnableWebSecurity
@@ -27,6 +29,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     
 	@Autowired
 	private ImplementsUserDetailsService userDetailsService;
+	
+	@Autowired
+	private TokenService tokenService;
+	
+	@Autowired
+	private UsuarioRepositorio UsuarioRepositorio;
 	
 	@Override
 	@Bean
@@ -51,7 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		.anyRequest().authenticated()
 		.and().csrf().disable()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+		.and().addFilterBefore(new AutenticacaoFilter(tokenService, UsuarioRepositorio), UsernamePasswordAuthenticationFilter.class);
 //		.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 
     }
