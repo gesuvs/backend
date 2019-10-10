@@ -14,7 +14,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan(basePackages = {"br.com.bandtec.bora.model.service"})
 @EnableJpaRepositories(basePackages = {"br.com.bandtec.bora.repository"})
 @EntityScan(basePackages = {"br.com.bandtec.bora.model.entity"})
-@EnableSwagger2
 public class BoraApplication {
 
 	public static void main(String[] args) {

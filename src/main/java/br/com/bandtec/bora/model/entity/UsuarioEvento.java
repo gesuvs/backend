@@ -30,6 +30,9 @@ public class UsuarioEvento {
 	@JoinColumn(name = "evento_id")
 	@JsonIgnoreProperties
 	private Evento evento;
+	
+	@Column(name = "is_organizador" , nullable = false)
+	private boolean isOrganizador; 
 
 	public UsuarioEvento() {
 	}

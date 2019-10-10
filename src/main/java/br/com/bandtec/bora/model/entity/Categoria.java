@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "tbd_categoria")
 public class Categoria {
@@ -25,6 +27,7 @@ public class Categoria {
 	private String nomeCategoria;
 
 	@OneToMany(mappedBy = "categoria")
+	@JsonIgnoreProperties
 	private List<Evento> eventos;
 
 	public Categoria() {

@@ -28,23 +28,18 @@ public class EventoController {
 
 	@Autowired
 	private EventoService eventoService;
-	
-	@Autowired
-	private UsuarioEventoRepositorio repositorio;
 
+	
+	@GetMapping("/eventos")
+	public List<Evento> buscarTodosEventos(Evento evento) {
+		return eventoService.buscarTodosEventos(evento);
+	}
+	
 	@PostMapping("/eventos")
-	public ResponseEntity<CadastrarEvento> evento(@RequestBody CadastrarEvento cadastrarEvento) {
-//		eventoService.cadastrarEvento(cadastrarEvento);
+	public ResponseEntity<CadastrarEvento> cadastrarEvento(@RequestBody CadastrarEvento cadastrarEvento) {
 		eventoService.cadastrarEvento(cadastrarEvento);
 		return ResponseEntity.ok().build();
 	}
-	
-//	@PostMapping("/eventos")
-//	public ResponseEntity<Evento> evento(@RequestBody Evento cadastrarEvento) {
-//		eventoService.criarEvento(cadastrarEvento);
-//		return ResponseEntity.ok().build();
-//	}
-	
 
 	@PutMapping("/eventos/{idEvento}")
 	public ResponseEntity<Evento> atualizarEvento(@PathVariable(value = "idEvento") Long idEvento,
@@ -62,15 +57,5 @@ public class EventoController {
 	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {
 		return eventoService.buscarEventosPorUsuario(evento.getOrganizador());
 	}
-
-	@GetMapping("/eventos")
-	public List<Evento> buscarTodosEventos(Evento evento) {
-		return eventoService.buscarTodosEventos(evento);
-	}
-	
-//	@GetMapping("/eventos")
-//	public List<UsuarioEvento> buscarTodosEventos(UsuarioEvento usuarioEvento) {
-//		return repositorio.findAll();
-//	}
 
 }

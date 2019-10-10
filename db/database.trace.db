@@ -1,0 +1,3 @@
+2019-10-09 21:47:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO TBD_EVENTO ( )[*]"; expected "DIRECT, SORTED, DEFAULT, VALUES, SET, (, WITH, SELECT, FROM, TABLE, VALUES"; SQL statement:
+INSERT INTO TBD_EVENTO ( ) [42001-199]

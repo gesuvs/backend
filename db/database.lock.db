@@ -1,0 +1,6 @@
+#FileLock
+#Wed Oct 09 22:02:13 BRT 2019
+hostName=HSL217
+id=16db330013a045cce068da7796679425a5a346b4b9a
+method=file
+server=10.3.0.42\:57245

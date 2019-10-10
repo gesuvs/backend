@@ -16,25 +16,16 @@ public class Endereco {
 	@Column(name = "idEndereco")
 	private Long idEndereco;
 	
-	@Column(name = "usuario")
-	private String usuario;
-	
-	@Column(name = "rua")
 	private String rua;
 	
-	@Column(name = "numero")
 	private String numero;
 	
-	@Column(name = "cep")
 	private String cep;
 	
-	@Column(name = "bairro")
 	private String bairro;
 	
-	@Column(name = "cidade")
 	private String cidade;
 	
-	@Column(name = "estado")
 	private String estado;
 
 	public Long getIdEndereco() {
@@ -42,16 +33,25 @@ public class Endereco {
 	}
 
 	
+	public Endereco() {
+	}
+
+	public Endereco(Long idEndereco, String rua, String numero, String cep, String bairro, String cidade,
+			String estado) {
+		this.idEndereco = idEndereco;
+		this.rua = rua;
+		this.numero = numero;
+		this.cep = cep;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.estado = estado;
+	}
+
+
+
+
 	public void setIdEndereco(Long idEndereco) {
 		this.idEndereco = idEndereco;
-	}
-
-	public String getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
 	}
 
 	public String getRua() {
@@ -101,7 +101,4 @@ public class Endereco {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
-	
-
 }

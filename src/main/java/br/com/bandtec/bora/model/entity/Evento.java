@@ -30,22 +30,27 @@ public class Evento {
 	@Size(min = 2)
 	@Column(name = "nome_evento")
 	private String nome;
+	
+	@NotEmpty
+	@Column(name = "data_hora_inicio")
+//	@DateTimeFormat(pattern = " dd/MM/yyyy hh:mm")
+	private String dataHoraInicio;
 
+	@Column(name = "data_hora_fim")
+//	@DateTimeFormat(pattern = " dd/MM/yyyy hh:mm")
+	private String dataHoraFim;
+	
 	@Size(max = 255)
 	private String descricao;
 
+	@Column(name = "is_privado")
+	private boolean isPrivado;
+	
+	private String senha;
+	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@NotEmpty
 	private Categoria categoria;
-
-	@NotEmpty
-	@Column(name = "data_hora_inicio")
-	@DateTimeFormat(pattern = " dd/MM/yyyy hh:mm")
-	private LocalDate dataHoraInicio;
-
-	@Column(name = "data_hora_fim")
-	@DateTimeFormat(pattern = " dd/MM/yyyy hh:mm")
-	private LocalDate dataHoraFim;
 
 	@NotEmpty
 	private String endereco;
@@ -58,7 +63,7 @@ public class Evento {
 	}
 
 	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty Categoria categoria,
-			@NotEmpty LocalDate dataHoraInicio, @NotEmpty String endereco, Usuario organizador) {
+			@NotEmpty String dataHoraInicio, @NotEmpty String endereco, Usuario organizador) {
 		this.idEvento = idEvento;
 		this.nome = nome;
 		this.categoria = categoria;
@@ -99,19 +104,19 @@ public class Evento {
 		this.categoria = categoria;
 	}
 
-	public LocalDate getDataHoraInicio() {
+	public String getDataHoraInicio() {
 		return dataHoraInicio;
 	}
 
-	public void setDataHoraInicio(LocalDate dataHoraInicio) {
+	public void setDataHoraInicio(String dataHoraInicio) {
 		this.dataHoraInicio = dataHoraInicio;
 	}
 
-	public LocalDate getDataHoraFim() {
+	public String getDataHoraFim() {
 		return dataHoraFim;
 	}
 
-	public void setDataHoraFim(LocalDate dataHoraFim) {
+	public void setDataHoraFim(String dataHoraFim) {
 		this.dataHoraFim = dataHoraFim;
 	}
 

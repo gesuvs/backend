@@ -1,0 +1,5 @@
+INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('Bru','Bruno',12345678911,'bruno@email.com','123456');
+INSERT INTO TBD_USUARIO ( APELIDO , NOME, CELULAR , EMAIL ,SENHA ) VALUES ('admin','admin',12345678911,'admin@email.com','123456');
+INSERT INTO TBD_categoria (NOME_CATEGORIA) values ('Esportes');
+INSERT INTO TBD_categoria (NOME_CATEGORIA) values ('Festas');
+INSERT INTO TBD_categoria (NOME_CATEGORIA) values ('Jogos');
