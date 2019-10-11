@@ -50,12 +50,13 @@ public class Usuario implements UserDetails {
 
 	@OneToMany(mappedBy = "organizador")
 	@JsonIgnoreProperties
-	private List<Evento> eventosCriado;
+	private List<Evento> eventosCriados;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnoreProperties
 	private List<UsuarioEvento> todosEventos;
 
+	
 	public Usuario() {
 	}
 
@@ -72,6 +73,7 @@ public class Usuario implements UserDetails {
 	public Usuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
+	
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -113,8 +115,8 @@ public class Usuario implements UserDetails {
 		this.senha = senha;
 	}
 
-	public List<Evento> getEventosCriado() {
-		return eventosCriado;
+	public List<Evento> getEventosCriados() {
+		return eventosCriados;
 	}
 
 	public List<UsuarioEvento> getTodosEventos() {
