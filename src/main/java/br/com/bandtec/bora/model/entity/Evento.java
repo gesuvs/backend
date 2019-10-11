@@ -1,7 +1,5 @@
 package br.com.bandtec.bora.model.entity;
 
-import java.time.LocalDate;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tbd_evento")
@@ -48,13 +48,16 @@ public class Evento {
 	
 	private String senha;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@NotEmpty
 	private Categoria categoria;
 
 	@NotEmpty
-	private String endereco;
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	private Endereco endereco;
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "organizador_id")
 	private Usuario organizador;
@@ -62,15 +65,25 @@ public class Evento {
 	public Evento() {
 	}
 
-	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty Categoria categoria,
-			@NotEmpty String dataHoraInicio, @NotEmpty String endereco, Usuario organizador) {
+	
+
+	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty String dataHoraInicio,
+			String dataHoraFim, @Size(max = 255) String descricao, boolean isPrivado, String senha,
+			@NotEmpty Categoria categoria, @NotEmpty Endereco endereco, Usuario organizador) {
+		super();
 		this.idEvento = idEvento;
 		this.nome = nome;
-		this.categoria = categoria;
 		this.dataHoraInicio = dataHoraInicio;
+		this.dataHoraFim = dataHoraFim;
+		this.descricao = descricao;
+		this.isPrivado = isPrivado;
+		this.senha = senha;
+		this.categoria = categoria;
 		this.endereco = endereco;
 		this.organizador = organizador;
 	}
+
+
 
 	public Long getIdEvento() {
 		return idEvento;
@@ -120,11 +133,28 @@ public class Evento {
 		this.dataHoraFim = dataHoraFim;
 	}
 
-	public String getEndereco() {
+	public boolean isPrivado() {
+		return isPrivado;
+	}
+
+	public void setPrivado(boolean isPrivado) {
+		this.isPrivado = isPrivado;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+	
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 

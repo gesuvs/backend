@@ -17,7 +17,7 @@ public class CategoriaController {
 	CategoriaService categoriaService;
 	
 	@GetMapping("/categoria")
-	public ResponseEntity<List<Categoria>> pesquisarCategorias(){
+	public ResponseEntity<List<Categoria>> buscarTodasCategorias(){
 		
 		List<Categoria> categorias = categoriaService.pesquisarTodasCategorias();
 		
