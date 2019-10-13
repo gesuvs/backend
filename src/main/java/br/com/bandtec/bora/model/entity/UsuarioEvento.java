@@ -33,6 +33,9 @@ public class UsuarioEvento {
 	
 	@Column(name = "is_organizador" , nullable = false)
 	private boolean isOrganizador; 
+	
+	
+	
 
 	public UsuarioEvento() {
 	}
@@ -57,5 +60,15 @@ public class UsuarioEvento {
 	public void setEvento(Evento evento) {
 		this.evento = evento;
 	}
+
+	public boolean isOrganizador() {
+		return isOrganizador;
+	}
+
+	public void setOrganizador(boolean isOrganizador) {
+		this.isOrganizador = isOrganizador;
+	}
+	
+	
 
 }

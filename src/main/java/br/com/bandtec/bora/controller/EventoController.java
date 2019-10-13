@@ -53,9 +53,9 @@ public class EventoController {
 
 	}
 
-	@GetMapping("/eventos/{usuario}")
-	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {
-		return eventoService.buscarEventosPorUsuario(evento.getOrganizador());
-	}
+//	@GetMapping("/eventos/{usuario}")
+//	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {
+//		return eventoService.buscarEventosPorUsuario(evento.getOrganizador());
+//	}
 
 }

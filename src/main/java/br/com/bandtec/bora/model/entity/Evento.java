@@ -17,8 +17,13 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "tbd_evento")
+@Data
 public class Evento {
 
 	@Id
@@ -41,7 +46,8 @@ public class Evento {
 	private String dataHoraFim;
 	
 	@Size(max = 255)
-	private String descricao;
+	@Column(name = "descricao")
+	private String descricaoEvento;
 
 	@Column(name = "is_privado")
 	private boolean isPrivado;
@@ -54,36 +60,33 @@ public class Evento {
 	private Categoria categoria;
 
 	@NotEmpty
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@OneToOne
+	@JoinColumn(name="idEndereco")
 	private Endereco endereco;
 
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "organizador_id")
-	private Usuario organizador;
+//	@JsonBackReference
+//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+//	@JoinColumn(name = "organizador_id")
+//	private UsuarioEvento organizador;
 
+	
 	public Evento() {
 	}
 
-	
-
 	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty String dataHoraInicio,
 			String dataHoraFim, @Size(max = 255) String descricao, boolean isPrivado, String senha,
-			@NotEmpty Categoria categoria, @NotEmpty Endereco endereco, Usuario organizador) {
-		super();
+			@NotEmpty Categoria categoria, @NotEmpty Endereco endereco, UsuarioEvento organizador) {
 		this.idEvento = idEvento;
 		this.nome = nome;
 		this.dataHoraInicio = dataHoraInicio;
 		this.dataHoraFim = dataHoraFim;
-		this.descricao = descricao;
+		this.descricaoEvento = descricao;
 		this.isPrivado = isPrivado;
 		this.senha = senha;
 		this.categoria = categoria;
 		this.endereco = endereco;
-		this.organizador = organizador;
+//		this.organizador = organizador;
 	}
-
-
 
 	public Long getIdEvento() {
 		return idEvento;
@@ -99,22 +102,6 @@ public class Evento {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
 	}
 
 	public String getDataHoraInicio() {
@@ -133,6 +120,14 @@ public class Evento {
 		this.dataHoraFim = dataHoraFim;
 	}
 
+	public String getDescricaoEvento() {
+		return descricaoEvento;
+	}
+
+	public void setDescricaoEvento(String descricaoEvento) {
+		this.descricaoEvento = descricaoEvento;
+	}
+
 	public boolean isPrivado() {
 		return isPrivado;
 	}
@@ -144,10 +139,17 @@ public class Evento {
 	public String getSenha() {
 		return senha;
 	}
-	
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	public Endereco getEndereco() {
@@ -157,12 +159,13 @@ public class Evento {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+	
 
-	public Usuario getOrganizador() {
-		return organizador;
-	}
-
-	public void setOrganizador(Usuario organizador) {
-		this.organizador = organizador;
-	}
+//	public UsuarioEvento getOrganizador() {
+//		return organizador;
+//	}
+//
+//	public void setOrganizador(UsuarioEvento organizador) {
+//		this.organizador = organizador;
+//	}
 }

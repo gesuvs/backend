@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "TBD_SUB_CATEGORIA")
 public class SubCategoria {
@@ -17,6 +19,7 @@ public class SubCategoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_sub_categoria")
+	@JsonIgnore
 	private Long id;
 	
 	@Column(name = "nome_sub_categoria")

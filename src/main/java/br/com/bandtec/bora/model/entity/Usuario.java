@@ -33,6 +33,7 @@ public class Usuario implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
+	@JsonIgnore
 	private Long idUsuario;
 
 	@Size(min = 2)
@@ -52,16 +53,10 @@ public class Usuario implements UserDetails {
 	@Size(min = 5)
 	private String senha;
 
-	@JsonManagedReference
-	@OneToMany(mappedBy = "organizador")
-	@JsonIgnoreProperties
-	@JsonIgnore
-	private List<Evento> eventosCriados;
-
-	@JsonManagedReference
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonIgnoreProperties
-	private List<UsuarioEvento> todosEventos;
+//	@JsonManagedReference
+//	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+//	@JsonIgnoreProperties
+//	private List<UsuarioEvento> todosEventos;
 
 	
 	public Usuario() {
@@ -122,13 +117,9 @@ public class Usuario implements UserDetails {
 		this.senha = senha;
 	}
 
-	public List<Evento> getEventosCriados() {
-		return eventosCriados;
-	}
-
-	public List<UsuarioEvento> getTodosEventos() {
-		return todosEventos;
-	}
+//	public List<UsuarioEvento> getTodosEventos() {
+//		return todosEventos;
+//	}
 
 	@JsonIgnore
 	@Override
