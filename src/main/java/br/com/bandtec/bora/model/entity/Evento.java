@@ -14,12 +14,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "tbd_evento")
@@ -86,80 +83,7 @@ public class Evento {
 		this.categoria = categoria;
 		this.endereco = endereco;
 //		this.organizador = organizador;
-	}
-
-	public Long getIdEvento() {
-		return idEvento;
-	}
-
-	public void setIdEvento(Long idEvento) {
-		this.idEvento = idEvento;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getDataHoraInicio() {
-		return dataHoraInicio;
-	}
-
-	public void setDataHoraInicio(String dataHoraInicio) {
-		this.dataHoraInicio = dataHoraInicio;
-	}
-
-	public String getDataHoraFim() {
-		return dataHoraFim;
-	}
-
-	public void setDataHoraFim(String dataHoraFim) {
-		this.dataHoraFim = dataHoraFim;
-	}
-
-	public String getDescricaoEvento() {
-		return descricaoEvento;
-	}
-
-	public void setDescricaoEvento(String descricaoEvento) {
-		this.descricaoEvento = descricaoEvento;
-	}
-
-	public boolean isPrivado() {
-		return isPrivado;
-	}
-
-	public void setPrivado(boolean isPrivado) {
-		this.isPrivado = isPrivado;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-	
+	}	
 
 //	public UsuarioEvento getOrganizador() {
 //		return organizador;

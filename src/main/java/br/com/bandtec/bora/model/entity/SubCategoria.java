@@ -12,6 +12,9 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "TBD_SUB_CATEGORIA")
 public class SubCategoria {
@@ -38,30 +41,6 @@ public class SubCategoria {
 	public SubCategoria(Long id, String nome, @NotEmpty Categoria categoria) {
 		this.id = id;
 		this.nome = nome;
-		this.categoria = categoria;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 }

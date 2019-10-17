@@ -19,7 +19,7 @@ import br.com.bandtec.bora.security.TokenService;
 
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AutenticacaoController {
 
 	@Autowired
