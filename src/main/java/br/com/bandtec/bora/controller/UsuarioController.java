@@ -17,14 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.excecoes.DomainException;
 import br.com.bandtec.bora.model.service.UsuarioService;
-import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/usuarios")
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UsuarioController {
 
-	private final UsuarioService usuarioService;
+	@Autowired
+	private UsuarioService usuarioService;
 
 
 	@PostMapping

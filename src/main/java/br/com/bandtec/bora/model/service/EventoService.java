@@ -1,5 +1,6 @@
 package br.com.bandtec.bora.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,7 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.bandtec.bora.model.dto.CadastrarEvento;
+import br.com.bandtec.bora.model.dto.CadastrarEventoDTO;
 import br.com.bandtec.bora.model.entity.Evento;
 import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.entity.UsuarioEvento;
@@ -24,30 +25,10 @@ public class EventoService {
 	private UsuarioEventoRepositorio usuarioEventoRepositorio;
 
 	
-	public Evento atualizarEvento(Long idEvento, Evento evento) {
-		evento.setIdEvento(idEvento);
-		evento.setNome(evento.getNome());
-		evento.setEndereco(evento.getEndereco());
-		evento.setCategoria(evento.getCategoria());
-		evento.setDataHoraInicio(evento.getDataHoraInicio());
-		return eventoRepositorio.save(evento);
-	}
-
-	public List<Evento> buscarEventoPorNome(String nomeEvento) {
-		return (List<Evento>) eventoRepositorio.findByNome(nomeEvento);
-	}
-
-//	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {
-//		return eventoRepositorio.findByOrganizador(usuario.getApelido());
-//	}
-
-	public List<Evento> buscarTodosEventos(Evento evento) {
-		return eventoRepositorio.findAll();
-	}
-
-
+//	Cadastrar Evento
+	
 	@Transactional
-	public void cadastrarEvento(CadastrarEvento cadastrarEvento) {
+	public void cadastrarEvento(CadastrarEventoDTO cadastrarEvento) {
 		Usuario usuario = new Usuario();
 		UsuarioEvento usuarioEvento = new UsuarioEvento();
 		Evento evento = new Evento();
@@ -57,7 +38,7 @@ public class EventoService {
 		evento.setDataHoraInicio(cadastrarEvento.getEvento().getDataHoraInicio());
 		evento.setEndereco(cadastrarEvento.getEvento().getEndereco());
 		evento.setNome(cadastrarEvento.getEvento().getNome());
-//		evento.setOrganizador(usuario);
+		evento.setOrganizador(usuario);
 
 		usuarioEventoRepositorio.save(usuarioEvento);
 		usuarioEvento.setEvento(evento);
@@ -65,5 +46,45 @@ public class EventoService {
 		usuarioEvento.setOrganizador(true);
 		
 	}
+	
+//	Atualizar Evento	
+	
+	public Evento atualizarEvento(Long idEvento, Evento evento) {
+		evento.setIdEvento(idEvento);
+		evento.setNome(evento.getNome());
+		evento.setEndereco(evento.getEndereco());
+		evento.setCategoria(evento.getCategoria());
+		evento.setDataHoraInicio(evento.getDataHoraInicio());
+		return eventoRepositorio.save(evento);
+	}
+	
+// Buscar Evento por nome	
 
+	public List<Evento> buscarEventoPorNome(String nomeEvento) {
+		return (List<Evento>) eventoRepositorio.findByNome(nomeEvento);
+	}
+
+//	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {
+//		return eventoRepositorio.findByOrganizador(usuario.getApelido());
+//	}
+
+//	Buscar Todos os eventos	
+	
+	public List<Evento> buscarTodosEventos(Evento evento) {
+		return eventoRepositorio.findAll();
+	}
+	
+//	Entrar no evento selecionado	
+
+	public Evento entrarEvento(Long idEvento, Usuario usuario) {
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		usuarios.add(usuario);
+		
+		Evento evento = eventoRepositorio.getOne(idEvento);
+//		evento.setParticipantes(usuarios);
+		
+		eventoRepositorio.save(evento);
+		
+		return evento;
+	}
 }

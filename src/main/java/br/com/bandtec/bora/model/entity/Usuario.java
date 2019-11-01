@@ -1,11 +1,15 @@
 package br.com.bandtec.bora.model.entity;
 
 import java.util.Collection;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -16,6 +20,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Data;
 
 @Data
@@ -48,11 +54,10 @@ public class Usuario implements UserDetails {
 	@Size(min = 5)
 	private String senha;
 
-//	@JsonManagedReference
-//	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JsonIgnoreProperties
-//	private List<UsuarioEvento> todosEventos;
-
+	@JsonManagedReference
+	@OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Evento> eventosCriados;
+	
 	
 	public Usuario() {
 	}
@@ -70,57 +75,46 @@ public class Usuario implements UserDetails {
 	public Usuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-	
-//	public List<UsuarioEvento> getTodosEventos() {
-//		return todosEventos;
-//	}
 
 	@JsonIgnore
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@JsonIgnore
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
 		return new BCryptPasswordEncoder().encode(senha);
 	}
 
 	@JsonIgnore
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return this.apelido;
 	}
 	
 	@JsonIgnore
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@JsonIgnore
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@JsonIgnore
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@JsonIgnore
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 }

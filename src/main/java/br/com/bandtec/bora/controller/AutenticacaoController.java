@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bandtec.bora.model.dto.TokenDto;
+import br.com.bandtec.bora.model.dto.TokenDTO;
 import br.com.bandtec.bora.model.form.LoginForm;
 import br.com.bandtec.bora.security.TokenService;
 
@@ -29,16 +29,15 @@ public class AutenticacaoController {
 	private TokenService tokenService;
 	
 	@PostMapping
-	public ResponseEntity<TokenDto> autenticar(@RequestBody @Valid LoginForm loginForm) {
+	public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid LoginForm loginForm) {
 		UsernamePasswordAuthenticationToken dadosLogin = loginForm.converter();
 		try {
 			Authentication auth = authManager.authenticate(dadosLogin);
 			String token = tokenService.geraToken(auth);
 			System.out.println("token usuario: "+ token);
-			return ResponseEntity.ok(new TokenDto(token, "Bearer"));	
+			return ResponseEntity.ok(new TokenDTO(token, "Bearer"));	
 		} catch (AuthenticationException e) {
 			return ResponseEntity.badRequest().build();
 		}
-	
 	}
 }

@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.bandtec.bora.model.dto.CadastrarEvento;
+import br.com.bandtec.bora.model.dto.CadastrarEventoDTO;
 import br.com.bandtec.bora.model.entity.Evento;
+import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.service.EventoService;
 
 @RestController
@@ -26,7 +27,7 @@ public class EventoController {
 
 	
 	@PostMapping
-	public ResponseEntity<CadastrarEvento> cadastrarEvento(@RequestBody CadastrarEvento cadastrarEvento) {
+	public ResponseEntity<CadastrarEventoDTO> cadastrarEvento(@RequestBody CadastrarEventoDTO cadastrarEvento) {
 		eventoService.cadastrarEvento(cadastrarEvento);
 		return ResponseEntity.ok().build();
 	}
@@ -36,9 +37,13 @@ public class EventoController {
 		return eventoService.buscarTodosEventos(evento);
 	}
 
+	@PostMapping("/{idEvento}")
+	public ResponseEntity<?> participarEvento(@PathVariable(value = "idEvento") Long idEvento,@Valid @RequestBody Usuario usuario) {
+		return ResponseEntity.ok(eventoService.entrarEvento(idEvento, usuario));
+	}
+	
 	@PutMapping("/{idEvento}")
-	public ResponseEntity<Evento> atualizarEvento(@PathVariable(value = "idEvento") Long idEvento,
-			@Valid @RequestBody Evento evento) {
+	public ResponseEntity<Evento> atualizarEvento(@PathVariable(value = "idEvento") Long idEvento,@Valid @RequestBody Evento evento) {
 		return ResponseEntity.ok(eventoService.atualizarEvento(idEvento, evento));
 	}
 
