@@ -1,7 +1,5 @@
 package br.com.bandtec.bora.model.entity;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -64,6 +61,10 @@ public class Evento {
 	@OneToOne
 	@JoinColumn(name="idEndereco")
 	private Endereco endereco;
+	
+	@OneToOne
+	@JoinColumn(name="id_recorrencia")
+	private Recorrencia recorrencia;
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
@@ -79,7 +80,7 @@ public class Evento {
 
 	public Evento(Long idEvento, @NotEmpty @Size(min = 2) String nome, @NotEmpty String dataHoraInicio,
 			String dataHoraFim, @Size(max = 255) String descricao, boolean isPrivado, String senha,
-			@NotEmpty Categoria categoria, @NotEmpty Endereco endereco, Usuario organizador) {
+			@NotEmpty Categoria categoria, @NotEmpty Endereco endereco, Usuario organizador, Recorrencia recorrencia) {
 		this.idEvento = idEvento;
 		this.nome = nome;
 		this.dataHoraInicio = dataHoraInicio;
@@ -90,5 +91,6 @@ public class Evento {
 		this.categoria = categoria;
 		this.endereco = endereco;
 		this.organizador = organizador;
+		this.recorrencia = recorrencia;
 	}	
 }

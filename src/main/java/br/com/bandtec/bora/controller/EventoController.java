@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bandtec.bora.model.dto.CadastrarEventoDTO;
 import br.com.bandtec.bora.model.entity.Evento;
-import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.service.EventoService;
 
 @RestController
@@ -36,22 +35,28 @@ public class EventoController {
 	public List<Evento> buscarTodosEventos(Evento evento) {
 		return eventoService.buscarTodosEventos(evento);
 	}
-
-	@PostMapping("/{idEvento}")
-	public ResponseEntity<?> participarEvento(@PathVariable(value = "idEvento") Long idEvento,@Valid @RequestBody Usuario usuario) {
-		return ResponseEntity.ok(eventoService.entrarEvento(idEvento, usuario));
+	
+	@GetMapping("/{idEvento}")
+	public ResponseEntity<Evento> buscarEventoPorIdEvento(@PathVariable(value = "idEvento") Long idEvento) throws Exception {
+		return ResponseEntity.ok(eventoService.buscarEventoPorIdEvento(idEvento));
 	}
+
+
+//	@PostMapping("/{idEvento}")
+//	public ResponseEntity<?> participarEvento(@PathVariable(value = "idEvento") Long idEvento,@Valid @RequestBody Usuario usuario) {
+//		return ResponseEntity.ok(eventoService.entrarEvento(idEvento, usuario));
+//	}
 	
 	@PutMapping("/{idEvento}")
 	public ResponseEntity<Evento> atualizarEvento(@PathVariable(value = "idEvento") Long idEvento,@Valid @RequestBody Evento evento) {
 		return ResponseEntity.ok(eventoService.atualizarEvento(idEvento, evento));
 	}
 
-	@GetMapping("/{nomeEvento}")
-	public ResponseEntity<List<Evento>> buscarEventoPorNome(@PathVariable(value = "nomeEvento") String nomeEvento) {
+	@GetMapping("/evento/{nomeEvento}")
+	public ResponseEntity<List<Evento>> buscarEventoPorNome(@PathVariable(value = "nomeEvento") String nomeEvento) throws Exception {
 		return ResponseEntity.ok(eventoService.buscarEventoPorNome(nomeEvento));
-
 	}
+	
 
 //	@GetMapping("/{usuario}")
 //	public List<Evento> buscarEventosPorUsuario(@RequestBody Evento evento) {

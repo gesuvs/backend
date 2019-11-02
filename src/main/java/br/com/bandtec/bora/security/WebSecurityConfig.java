@@ -45,13 +45,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
 		
 		.antMatchers(HttpMethod.GET, "/api/eventos").permitAll()
-		.antMatchers(HttpMethod.GET, "/api/{eventos}").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/eventos/**").permitAll()
 		.antMatchers(HttpMethod.POST, "/api/eventos").permitAll()
-		.antMatchers(HttpMethod.PUT, "/api/eventos/{idEvento}").permitAll()
+		.antMatchers(HttpMethod.PUT, "/api/eventos").permitAll()
 		
 		.antMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/usuarios/**").permitAll()
 		
 		.antMatchers(HttpMethod.GET, "/api/categoria").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/participantes").permitAll()
 		
 		.anyRequest().authenticated()
 		.and().csrf().disable()

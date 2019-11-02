@@ -28,8 +28,12 @@ public class UsuarioService {
 	}
 
 	
-	public Usuario buscarUsuarioPeloIdUsuario(Long idUsuario) {
-		return usuarioRepositorio.findById(idUsuario).orElse(null);
+	public Usuario buscarUsuarioPeloIdUsuario(Long idUsuario) throws Exception {
+		Usuario usuario = usuarioRepositorio.findById(idUsuario).orElse(null);
+		if (usuario == null) {
+			throw new Exception("Usuario Não Encontrado");
+		}
+		return usuario;
 	}
 
 	

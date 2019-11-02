@@ -1,6 +1,5 @@
 package br.com.bandtec.bora.model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -25,8 +24,6 @@ public class EventoService {
 	private UsuarioEventoRepositorio usuarioEventoRepositorio;
 
 	
-//	Cadastrar Evento
-	
 	@Transactional
 	public void cadastrarEvento(CadastrarEventoDTO cadastrarEvento) {
 		Usuario usuario = new Usuario();
@@ -45,9 +42,7 @@ public class EventoService {
 		usuarioEvento.setUsuario(usuario);
 		usuarioEvento.setOrganizador(true);
 		
-	}
-	
-//	Atualizar Evento	
+	}	
 	
 	public Evento atualizarEvento(Long idEvento, Evento evento) {
 		evento.setIdEvento(idEvento);
@@ -58,33 +53,42 @@ public class EventoService {
 		return eventoRepositorio.save(evento);
 	}
 	
-// Buscar Evento por nome	
-
-	public List<Evento> buscarEventoPorNome(String nomeEvento) {
-		return (List<Evento>) eventoRepositorio.findByNome(nomeEvento);
+	public List<Evento> buscarTodosEventos(Evento evento) {
+		return eventoRepositorio.findAll();
 	}
+
+	public List<Evento> buscarEventoPorNome(String nomeEvento) throws Exception {
+		List<Evento> eventos = eventoRepositorio.findByNome(nomeEvento);
+		if (eventos.isEmpty()) {
+			throw new Exception("Evento não encontrado"); 
+		}
+		return eventos;
+	}
+	
+	public Evento buscarEventoPorIdEvento(Long idEvento) throws Exception {
+		Evento evento = eventoRepositorio.findById(idEvento).orElse(null);
+		if (evento == null) {
+			throw new Exception("Evento não encontrado");
+		}
+		return evento;
+		
+	}
+	
 
 //	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {
 //		return eventoRepositorio.findByOrganizador(usuario.getApelido());
 //	}
-
-//	Buscar Todos os eventos	
-	
-	public List<Evento> buscarTodosEventos(Evento evento) {
-		return eventoRepositorio.findAll();
-	}
-	
-//	Entrar no evento selecionado	
-
-	public Evento entrarEvento(Long idEvento, Usuario usuario) {
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-		usuarios.add(usuario);
 		
-		Evento evento = eventoRepositorio.getOne(idEvento);
+
+//	public Evento entrarEvento(Long idEvento, Usuario usuario) {
+//		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+//		usuarios.add(usuario);
+		
+//		Evento evento = eventoRepositorio.getOne(idEvento);
 //		evento.setParticipantes(usuarios);
 		
-		eventoRepositorio.save(evento);
+//		eventoRepositorio.save(evento);
 		
-		return evento;
-	}
+//		return evento;
+//	}
 }
