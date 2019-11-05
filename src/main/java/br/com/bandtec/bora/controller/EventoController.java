@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.bandtec.bora.model.dto.CadastrarEventoDTO;
 import br.com.bandtec.bora.model.entity.Evento;
+import br.com.bandtec.bora.model.entity.Usuario;
 import br.com.bandtec.bora.model.service.EventoService;
 
 @RestController
@@ -41,11 +42,10 @@ public class EventoController {
 		return ResponseEntity.ok(eventoService.buscarEventoPorIdEvento(idEvento));
 	}
 
-
-//	@PostMapping("/{idEvento}")
-//	public ResponseEntity<?> participarEvento(@PathVariable(value = "idEvento") Long idEvento,@Valid @RequestBody Usuario usuario) {
-//		return ResponseEntity.ok(eventoService.entrarEvento(idEvento, usuario));
-//	}
+	@PostMapping("/{idEvento}")
+	public ResponseEntity<?> participarEvento(@PathVariable(value = "idEvento") Long idEvento,@Valid @RequestBody Usuario usuario) {
+		return ResponseEntity.ok(eventoService.entrarEvento(idEvento, usuario));
+	}
 	
 	@PutMapping("/{idEvento}")
 	public ResponseEntity<Evento> atualizarEvento(@PathVariable(value = "idEvento") Long idEvento,@Valid @RequestBody Evento evento) {

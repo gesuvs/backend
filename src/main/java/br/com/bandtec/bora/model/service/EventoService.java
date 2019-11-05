@@ -53,6 +53,16 @@ public class EventoService {
 		return eventoRepositorio.save(evento);
 	}
 	
+	public Evento entrarEvento(Long idEvento, Usuario usuario) {
+		UsuarioEvento usuarioEvento = new UsuarioEvento();
+		Evento evento = eventoRepositorio.findById(idEvento).orElse(null);
+		usuarioEvento.setEvento(evento);
+		usuarioEvento.setUsuario(usuario);
+		usuarioEvento.setOrganizador(false);
+		usuarioEventoRepositorio.save(usuarioEvento);
+		return evento;
+	}
+	
 	public List<Evento> buscarTodosEventos(Evento evento) {
 		return eventoRepositorio.findAll();
 	}
@@ -73,22 +83,9 @@ public class EventoService {
 		return evento;
 		
 	}
-	
 
 //	public List<Evento> buscarEventosPorUsuario(Usuario usuario) {
 //		return eventoRepositorio.findByOrganizador(usuario.getApelido());
 //	}
 		
-
-//	public Evento entrarEvento(Long idEvento, Usuario usuario) {
-//		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-//		usuarios.add(usuario);
-		
-//		Evento evento = eventoRepositorio.getOne(idEvento);
-//		evento.setParticipantes(usuarios);
-		
-//		eventoRepositorio.save(evento);
-		
-//		return evento;
-//	}
 }
