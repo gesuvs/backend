@@ -40,4 +40,12 @@ public class UsuarioService {
 	public void deletarUsuario(Long idUsuario) {
 		usuarioRepositorio.deleteById(idUsuario);
 	}
+
+	public Usuario buscarUsuarioPeloNome(String apelido) throws Exception {
+		Usuario usuario = usuarioRepositorio.findByApelido(apelido);
+		if (usuario == null) {
+			
+		}
+		return usuario;
+	}
 }

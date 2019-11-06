@@ -19,7 +19,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -57,6 +56,9 @@ public class Usuario implements UserDetails {
 	@JsonManagedReference
 	@OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Evento> eventosCriados;
+	
+	@OneToMany
+	private List<UsuarioEvento> eventosQueParticipo;
 	
 	
 	public Usuario() {

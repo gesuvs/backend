@@ -40,7 +40,11 @@ public class UsuarioController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Usuario> buscarUsuarioPeloIdUsuario(@PathVariable(value = "id") Long idUsuario) throws Exception {
 		return ResponseEntity.ok(usuarioService.buscarUsuarioPeloIdUsuario(idUsuario));
-
+	}
+	
+	@GetMapping("usuario/{apelido}")
+	public ResponseEntity<Usuario> buscarUsuarioPeloNome(@PathVariable(value = "apelido") String apelido) throws Exception {
+		return ResponseEntity.ok(usuarioService.buscarUsuarioPeloNome(apelido));
 	}
 
 	@DeleteMapping("/{idUsuario}")

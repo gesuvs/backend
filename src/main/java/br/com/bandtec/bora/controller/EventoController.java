@@ -26,6 +26,11 @@ public class EventoController {
 	private EventoService eventoService;
 
 	
+	@GetMapping("/eventosHome")
+	public ResponseEntity<List<Evento>> buscarEventosHome(){
+		return ResponseEntity.ok().body(eventoService.buscarEventosHome()); 
+	}
+	
 	@PostMapping
 	public ResponseEntity<CadastrarEventoDTO> cadastrarEvento(@RequestBody CadastrarEventoDTO cadastrarEvento) {
 		eventoService.cadastrarEvento(cadastrarEvento);
